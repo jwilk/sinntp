@@ -25,6 +25,7 @@ __version__ = '0.100'
 from nntplib import NNTP, NNTPTemporaryError
 import os
 import re
+import socket
 import sys
 import time
 
@@ -63,12 +64,17 @@ if __name__ == '__main__':
         print >>sys.stderr, __doc__
         sys.exit(1)
     groups = sys.argv[1:]
-    host = os.getenv('NNTPSERVER')
-    
-    if host is None:
-        host = file('/etc/news/server').readline()
+    host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
 
-    connection = Connection(host)
+    if not host:
+        print >>sys.stderr, 'NNTP server is not specified.'
+        sys.exit(2)
+
+    try:
+        connection = Connection(host)
+    except socket.gaierror, e:
+        print >>sys.stderr, 'Could not connect to \'%s\': %s' % (host, e[1])
+        sys.exit(3)
     try:
         for group in groups:
             connection.fetch(group)
