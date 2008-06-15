@@ -1,0 +1,27 @@
+This package was debianized by Jakub Wilk <ubanus@users.sf.net> on Sun,
+15 Jun 2008 21:58:09 +0200.
+
+Upstream Authors: 
+
+  Piotr Lewandowski <piotr.lewandowski+sinntp@gmail.com>
+  Jakub Wilk <ubanus@users.sf.net>
+
+Copyright: 
+
+  Copyright © 2008 Piotr Lewandowski, Jakub Wilk.
+
+License:
+
+  This package is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; version 2 dated June, 1991.
+
+  This package is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  General Public License for more details.
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in `/usr/share/common-licenses/GPL-2'.
+
+# vim:tw=72
