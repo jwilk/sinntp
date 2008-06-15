@@ -1,0 +1,78 @@
+#!/usr/bin/python
+# encoding=UTF-8
+
+# Copyright © 2008
+#   Piotr Lewandowski <piotr.lewandowski+mbank-cli@gmail.com>,
+#   Jakub Wilk <ubanus@users.sf.net>.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License, version 2, as 
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+'''
+Usage:
+    sinntp groupname [groupname ...]
+'''
+
+__author__ = ('Jakub Wilk', 'Piotr Lewandowski')
+__version__ = '0.100'
+
+from nntplib import NNTP, NNTPTemporaryError
+import os
+import re
+import sys
+import time
+
+def escape_from(line):
+    if re.search(r'^>*From ', line):
+        return '>' + line
+    return line
+
+class Connection(NNTP):
+    def fetch(self, group_name, start = 0):
+        response, count, first, last, name = self.group(group_name)
+        count, first, last = (int(x) for x in (count, first, last))
+        i = max(start, first)
+        while i <= last:
+            try:
+                self.stat(str(i))
+            except NNTPTemporaryError, e:
+                i += 1
+            else:
+                break
+        else:
+            print >>sys.stderr, 'Nothing to fetch.'
+            return
+        no = -1
+        while int(no) < last:
+            _, no, _ = self.next()
+            _, _, _, body = self.article(no)
+            print 'From %s  %s' % ('sinntp@localhost', time.ctime(time.time()))
+            print 'Status: '
+            for line in body:
+                print escape_from(line)
+            print
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print >>sys.stderr, __doc__
+        sys.exit(1)
+    groups = sys.argv[1:]
+    host = os.getenv('NNTPSERVER')
+    
+    if host is None:
+        host = file('/etc/news/server').readline()
+
+    connection = Connection(host)
+    try:
+        for group in groups:
+            connection.fetch(group)
+    finally:
+        connection.quit()
+
+# vim:ts=4 sw=4 et
