@@ -49,15 +49,21 @@ class Connection(NNTP):
         else:
             print >>sys.stderr, 'Nothing to fetch.'
             return
-        no = -1
-        while int(no) < last:
-            _, no, _ = self.next()
+        no = str(i)
+        while 1:
             _, _, _, body = self.article(no)
             print 'From %s  %s' % ('sinntp@localhost', time.ctime(time.time()))
             print 'Status: '
             for line in body:
                 print escape_from(line)
             print
+            try:
+                _, no, _ = self.next()
+            except NNTPTemporaryError, ex:
+                if ex.response.startswith('421'):
+                    break
+                raise
+        return int(no)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
