@@ -23,6 +23,7 @@ __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '0.100'
 
 from nntplib import NNTP, NNTPTemporaryError
+import errno
 import os
 import re
 import socket
@@ -33,6 +34,36 @@ def escape_from(line):
     if re.search(r'^>*From ', line):
         return '>' + line
     return line
+
+class Config(object):
+
+    def __init__(self, hostname):
+        self._hostname = hostname
+        self._root = os.getenv('SINNTP_HOME') or '.'
+        os.chdir(self._root)
+
+    def _get_file_name(self, name):
+        base_name = '%s@%s' % (name, self._hostname)
+        return os.path.join(self._root, base_name)
+
+    def __getitem__(self, name):
+        try:
+            file = open(self._get_file_name(name), 'rb')
+        except IOError, ex:
+            if ex.errno == errno.ENOENT:
+                return 0
+            raise
+        try:
+            return int(file.read())
+        finally:
+            file.close()
+
+    def __setitem__(self, name, value):
+        file = open(self._get_file_name(name), 'wb')
+        try:
+            file.write(str(value))
+        finally:
+            file.close()
 
 class Connection(NNTP):
     def fetch(self, group_name, start = 0):
@@ -76,6 +107,7 @@ if __name__ == '__main__':
         print >>sys.stderr, 'NNTP server is not specified.'
         sys.exit(2)
 
+    config = Config(host)
     try:
         connection = Connection(host)
     except socket.error, e:
@@ -83,7 +115,9 @@ if __name__ == '__main__':
         sys.exit(3)
     try:
         for group in groups:
-            connection.fetch(group)
+            no = connection.fetch(group, start=config[group])
+            if no is not None:
+                config[group] = no + 1
     finally:
         connection.quit()
 
