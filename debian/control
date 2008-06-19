@@ -3,7 +3,7 @@ Section: news
 Priority: extra
 Maintainer: Jakub Wilk <ubanus@users.sf.net>
 Build-Depends: debhelper (>= 6)
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 Bugs: mailto:ubanus@users.sf.net
 
 Package: sinntp
