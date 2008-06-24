@@ -130,7 +130,7 @@ if __name__ == '__main__':
     try:
         command = os.path.basename(sys.argv[0])
         try:
-            [cmd] = [cmd for sufix, cmd in COMMANDS.iteritems() if command.endswith(sufix)]
+            [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
         except ValueError:
             print >>sys.stderr, 'Unknown command: \'%s\'' % command
             sys.exit(4)
