@@ -24,16 +24,11 @@ __version__ = '0.100'
 
 from nntplib import NNTP, NNTPTemporaryError
 import errno
+import mailbox
 import os
-import re
 import socket
 import sys
 import time
-
-def escape_from(line):
-    if re.search(r'^>*From ', line):
-        return '>' + line
-    return line
 
 class Config(object):
 
@@ -78,23 +73,17 @@ class Connection(NNTP):
             else:
                 break
         else:
-            print >>sys.stderr, 'Nothing to fetch.'
             return
         no = str(i)
         while 1:
             _, _, _, body = self.article(no)
-            print 'From %s  %s' % ('sinntp@localhost', time.ctime(time.time()))
-            print 'Status: '
-            for line in body:
-                print escape_from(line)
-            print
+            yield int(no), body
             try:
                 _, no, _ = self.next()
             except NNTPTemporaryError, ex:
                 if ex.response.startswith('421'):
                     break
                 raise
-        return int(no)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -115,9 +104,19 @@ if __name__ == '__main__':
         sys.exit(3)
     try:
         for group in groups:
-            no = connection.fetch(group, start=config[group])
-            if no is not None:
-                config[group] = no + 1
+            mbox = mailbox.mbox(group, create = True)
+            mbox.lock()
+            last = None
+            for no, message in connection.fetch(group, start=config[group]):
+                last = no
+                message = '\n'.join(message)
+                mbox.add(message)
+            mbox.flush()
+            mbox.unlock()
+            if last is not None:
+                config[group] = last + 1
+            else:
+                print >>sys.stderr, 'Nothing to fetch.'
     finally:
         connection.quit()
 
