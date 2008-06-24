@@ -122,18 +122,18 @@ if __name__ == '__main__':
         print >>sys.stderr, 'NNTP server is not specified.'
         sys.exit(2)
 
+    command = os.path.basename(sys.argv[0])
+    try:
+        [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
+    except ValueError:
+        print >>sys.stderr, 'Unknown command: \'%s\'' % command
+        sys.exit(4)
     try:
         connection = Connection(host)
     except socket.error, e:
         print >>sys.stderr, 'Could not connect to \'%s\': %s' % (host, e[1])
         sys.exit(3)
     try:
-        command = os.path.basename(sys.argv[0])
-        try:
-            [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
-        except ValueError:
-            print >>sys.stderr, 'Unknown command: \'%s\'' % command
-            sys.exit(4)
         cmd(connection)
     finally:
         connection.quit()
