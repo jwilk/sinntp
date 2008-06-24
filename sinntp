@@ -26,6 +26,7 @@ from nntplib import NNTP, NNTPTemporaryError
 import errno
 import mailbox
 import os
+import os.path
 import socket
 import sys
 import time
@@ -85,38 +86,51 @@ class Connection(NNTP):
                     break
                 raise
 
-if __name__ == '__main__':
+def pull(connection):
+    config = Config(connection.host)
     if len(sys.argv) < 2:
         print >>sys.stderr, __doc__
         sys.exit(1)
     groups = sys.argv[1:]
+    for group in groups:
+        mbox = mailbox.mbox(group, create = True)
+        mbox.lock()
+        last = None
+        for no, message in connection.fetch(group, start=config[group]):
+            last = no
+            message = '\n'.join(message)
+            mbox.add(message)
+        mbox.flush()
+        mbox.unlock()
+        if last is not None:
+            config[group] = last + 1
+        else:
+            print >>sys.stderr, 'Nothing to fetch.'
+
+COMMANDS = dict(
+    pull = pull,
+)
+
+if __name__ == '__main__':
     host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
 
     if not host:
         print >>sys.stderr, 'NNTP server is not specified.'
         sys.exit(2)
 
-    config = Config(host)
     try:
         connection = Connection(host)
     except socket.error, e:
         print >>sys.stderr, 'Could not connect to \'%s\': %s' % (host, e[1])
         sys.exit(3)
     try:
-        for group in groups:
-            mbox = mailbox.mbox(group, create = True)
-            mbox.lock()
-            last = None
-            for no, message in connection.fetch(group, start=config[group]):
-                last = no
-                message = '\n'.join(message)
-                mbox.add(message)
-            mbox.flush()
-            mbox.unlock()
-            if last is not None:
-                config[group] = last + 1
-            else:
-                print >>sys.stderr, 'Nothing to fetch.'
+        command = os.path.basename(sys.argv[0])
+        try:
+            [cmd] = [cmd for sufix, cmd in COMMANDS.iteritems() if command.endswith(sufix)]
+        except ValueError:
+            print >>sys.stderr, 'Unknown command: \'%s\'' % command
+            sys.exit(4)
+        cmd(connection)
     finally:
         connection.quit()
 
