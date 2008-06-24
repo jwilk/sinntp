@@ -107,8 +107,12 @@ def pull(connection):
         else:
             print >>sys.stderr, 'Nothing to fetch.'
 
+def push(connection):
+    connection.post(sys.stdin)
+
 COMMANDS = dict(
     pull = pull,
+    push = push,
 )
 
 if __name__ == '__main__':
