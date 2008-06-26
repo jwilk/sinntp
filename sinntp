@@ -94,16 +94,19 @@ def pull(connection):
         sys.exit(1)
     groups = sys.argv[1:]
     for group in groups:
-        mbox = mailbox.mbox(group, create = True)
-        mbox.lock()
+        mbox = None
+        last = None
         try:
-            last = None
             for no, message in connection.fetch(group, start=config[group]):
+                if not mbox:
+                    mbox = mailbox.mbox(group, create = True)
+                    mbox.lock()
                 last = no
                 message = '\n'.join(message)
                 mbox.add(message)
         finally:
-            mbox.close()
+            if mbox:
+                mbox.close()
         if last is not None:
             config[group] = last + 1
         else:
