@@ -37,7 +37,8 @@ class Config(object):
         self._hostname = hostname
         self._root = os.getenv('SINNTP_HOME') or os.path.expanduser('~/.sinntp/')
         if not os.path.isdir(self._root):
-            raise EnvironmentError('%r does not exist or is not a directory' % self._root)
+            logging.info('Creating directory \'%s\'.', self._root)
+            os.makedirs(self._root)
 
     def _get_file_name(self, name):
         base_name = '%s@%s' % (name, self._hostname)
