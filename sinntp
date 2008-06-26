@@ -24,6 +24,7 @@ __version__ = '0.100'
 
 from nntplib import NNTP, NNTPTemporaryError
 import errno
+import logging
 import mailbox
 import os
 import os.path
@@ -90,7 +91,7 @@ class Connection(NNTP):
 def pull(connection):
     config = Config(connection.host)
     if len(sys.argv) < 2:
-        print >>sys.stderr, __doc__
+        logging.info(__doc__)
         sys.exit(1)
     groups = sys.argv[1:]
     for group in groups:
@@ -107,7 +108,7 @@ def pull(connection):
         if last is not None:
             config[group] = last + 1
         else:
-            print >>sys.stderr, 'Nothing to fetch.'
+            logging.info('Nothing to fetch.')
 
 def push(connection):
     connection.post(sys.stdin)
@@ -118,22 +119,23 @@ COMMANDS = dict(
 )
 
 if __name__ == '__main__':
-    host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
+    logging.basicConfig(level = logging.INFO, format = '%(message)s')
 
+    host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
     if not host:
-        print >>sys.stderr, 'NNTP server is not specified.'
+        logging.error('NNTP server is not specified.')
         sys.exit(2)
 
     command = os.path.basename(sys.argv[0])
     try:
         [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
     except ValueError:
-        print >>sys.stderr, 'Unknown command: \'%s\'' % command
+        logging.error('Unknown command: \'%s\'', command)
         sys.exit(4)
     try:
         connection = Connection(host)
     except socket.error, e:
-        print >>sys.stderr, 'Could not connect to \'%s\': %s' % (host, e[1])
+        logging.error('Could not connect to \'%s\': %s', host, e[1])
         sys.exit(3)
     try:
         cmd(connection)
