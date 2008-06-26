@@ -129,6 +129,8 @@ if __name__ == '__main__':
         sys.exit(2)
 
     command = os.path.basename(sys.argv[0])
+    if command == 'sinntp':
+        command = sys.argv.pop(1)
     try:
         [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
     except ValueError:
