@@ -30,7 +30,6 @@ import os
 import os.path
 import socket
 import sys
-import time
 
 class Config(object):
 
