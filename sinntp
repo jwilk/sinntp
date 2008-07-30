@@ -37,7 +37,7 @@ class Config(object):
         self._hostname = hostname
         self._root = os.getenv('SINNTP_HOME') or os.path.expanduser('~/.sinntp/')
         if not os.path.isdir(self._root):
-            logging.info('Creating directory \'%s\'.', self._root)
+            logging.info('Creating directory %r.', self._root)
             os.makedirs(self._root)
 
     def _get_file_name(self, name):
@@ -135,12 +135,12 @@ if __name__ == '__main__':
     try:
         [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
     except ValueError:
-        logging.error('Unknown command: \'%s\'', command)
+        logging.error('Unknown command: %r', command)
         sys.exit(4)
     try:
         connection = Connection(host)
     except socket.error, e:
-        logging.error('Could not connect to \'%s\': %s', host, e[1])
+        logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
     try:
         cmd(connection)
