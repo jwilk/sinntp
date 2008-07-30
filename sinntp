@@ -14,11 +14,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-'''
-Usage:
-    sinntp groupname [groupname ...]
-'''
-
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '0.100'
 
@@ -89,10 +84,12 @@ class Connection(NNTP):
                 raise
 
 def pull(connection):
+    '''
+    nntp-pull [options] groupname [groupname ...]
+    '''
     config = Config(connection.host)
     if len(sys.argv) < 2:
-        logging.info(__doc__)
-        sys.exit(1)
+        show_usage(pull)
     groups = sys.argv[1:]
     for group in groups:
         mbox = None
@@ -114,7 +111,22 @@ def pull(connection):
             logging.info('Nothing to fetch.')
 
 def push(connection):
+    '''
+    nntp-push [options]
+    '''
+    if len(sys.argv) != 1:
+        show_usage(push)
     connection.post(sys.stdin)
+
+def show_usage(command = None):
+    logging.info('Usage: ')
+    if command is None:
+        commands = COMMANDS
+    else:
+        commands = (command,)
+    for command in commands:
+        logging.info('\t' + command.__doc__.strip())
+    sys.exit(1)
 
 COMMANDS = dict(
     pull = pull,
@@ -131,7 +143,10 @@ if __name__ == '__main__':
 
     command = os.path.basename(sys.argv[0])
     if command == 'sinntp':
-        command = sys.argv.pop(1)
+        try:
+            command = sys.argv.pop(1)
+        except IndexError:
+            show_usage()
     try:
         [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
     except ValueError:
