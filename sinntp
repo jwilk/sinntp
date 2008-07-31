@@ -60,9 +60,16 @@ class Config(object):
 
 class Connection(NNTP):
     def fetch(self, group_name, start = 0):
+        logging.info('Looking for group %r.', group_name)
         response, count, first, last, name = self.group(group_name)
         count, first, last = (int(x) for x in (count, first, last))
         i = max(start, first)
+        count = max(last - i, 0)
+        logging.info('There %(be)s %(count)s new mesage%(plural)s.' % dict(
+            be = 'are' if count != 1 else 'is',
+            count = count if count else 'no',
+            plural = 's' if count != 1 else ''
+        ))
         while i <= last:
             try:
                 self.stat(str(i))
@@ -107,8 +114,6 @@ def pull(connection):
                 mbox.close()
         if last is not None:
             config[group] = last + 1
-        else:
-            logging.info('Nothing to fetch.')
 
 def push(connection):
     '''
@@ -150,9 +155,10 @@ if __name__ == '__main__':
     try:
         [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
     except ValueError:
-        logging.error('Unknown command: %r', command)
+        logging.error('Unknown command: %r.', command)
         sys.exit(4)
     try:
+        logging.info('Connecting to %r...', host)
         connection = Connection(host)
     except socket.error, e:
         logging.error('Could not connect to %r: %s', host, e[1])
@@ -161,5 +167,6 @@ if __name__ == '__main__':
         cmd(connection)
     finally:
         connection.quit()
+        logging.info('Connection to %r closed.', host)
 
 # vim:ts=4 sw=4 et
