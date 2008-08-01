@@ -26,6 +26,24 @@ import os.path
 import socket
 import sys
 
+def monkey_patch_mailbox_module():
+    '''
+    Work-around a bug in the `mailbox` module.
+    See http://bugs.python.org/issue3228 for details.
+    '''
+    try:
+        create_carefully = mailbox._create_carefully
+    except AttributeError:
+        return
+    def create_carefully_666(*args, **kwargs):
+        file = create_carefully(*args, **kwargs)
+        mode = os.stat(file.name).st_mode & 0666
+        os.chmod(file.name, mode)
+        return file
+    mailbox._create_carefully = create_carefully_666
+monkey_patch_mailbox_module()
+del monkey_patch_mailbox_module
+
 class Config(object):
 
     def __init__(self, hostname):
