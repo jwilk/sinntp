@@ -21,6 +21,7 @@ from nntplib import NNTP, NNTPTemporaryError
 import errno
 import logging
 import mailbox
+import optparse
 import os
 import os.path
 import socket
@@ -110,8 +111,18 @@ class Connection(NNTP):
 
 class Command(object):
 
+    def get_option_parser(self):
+        o = optparse.OptionParser(usage = self.__doc__)
+        o.add_option('-s', '--syslog', dest='syslog', action='store_true')
+        o.add_option('-v', '--verbose', dest='verbose', action='store_true')
+        o.add_option('-V', '--version', dest='version', action='store_true')
+        o.add_option('-p', '--plugin', dest='plugins', action='append')
+        return o
+
     def __init__(self, argv):
-        pass
+        oparser = self.get_option_parser()
+        self.options, self.args = oparser.parse_args(argv)
+        self.oparser = oparser
 
     def __call__(self):
         pass
@@ -122,10 +133,20 @@ class Pull(Command):
     nntp-pull [options] groupname [groupname ...]
     '''
 
+    NAME = 'pull'
+
+    def get_option_parser(self):
+        o = Command.get_option_parser(self)
+        o.add_option('--no-limit', dest='limit', action='store_const', const=None)
+        o.add_option('--limit', dest='limit', type='int', action='store')
+        return o
+
     def __init__(self, argv):
-        if len(sys.argv) < 2:
-            show_usage(pull)
-        self.groups = sys.argv[1:]
+        Command.__init__(self, argv)
+        if not self.args:
+            self.oparser.error('At least one group name is required')
+        self.groups = self.args
+        del self.args
 
     def __call__(self, connection):
         config = Config(connection.host)
@@ -152,21 +173,21 @@ class Push(Command):
     nntp-push [options]
     '''
 
+    NAME = 'push'
+
     def __init__(self, argv):
-        if len(sys.argv) != 1:
-            show_usage(push)
+        oparser = Command.__init__(self, argv)
+        if self.args:
+            print self.args
+            self.oparser.error('No arguments are expected')
 
     def __call__(self, connection):
         connection.post(sys.stdin)
 
-def show_usage(command = None):
-    logging.info('Usage: ')
-    if command is None:
-        commands = COMMANDS.values()
-    else:
-        commands = (command,)
-    for command in commands:
-        logging.info('\t' + command.__doc__.strip())
+def show_usage():
+    sys.stderr.write('Usage: \n')
+    for command in COMMANDS.itervalues():
+        sys.stderr.write('    %s\n' % command.__doc__.strip())
     sys.exit(1)
 
 COMMANDS = dict(
@@ -182,10 +203,11 @@ if __name__ == '__main__':
         logging.error('NNTP server is not specified.')
         sys.exit(2)
 
-    command = os.path.basename(sys.argv[0])
+    argv = sys.argv[:]
+    command = os.path.basename(argv.pop(0))
     if command == 'sinntp':
         try:
-            command = sys.argv.pop(1)
+            command = argv.pop(0)
         except IndexError:
             show_usage()
     try:
@@ -193,7 +215,8 @@ if __name__ == '__main__':
     except ValueError:
         logging.error('Unknown command: %r.', command)
         sys.exit(4)
-    cmd = cmd(sys.argv)
+    sys.argv = ['nntp-' + cmd.NAME]
+    cmd = cmd(argv)
     try:
         logging.info('Connecting to %r...', host)
         connection = Connection(host)
