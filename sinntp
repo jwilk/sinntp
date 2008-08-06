@@ -108,38 +108,56 @@ class Connection(NNTP):
                     break
                 raise
 
-def pull(connection):
+class Command(object):
+
+    def __init__(self, argv):
+        pass
+
+    def __call__(self):
+        pass
+
+class Pull(Command):
+
     '''
     nntp-pull [options] groupname [groupname ...]
     '''
-    config = Config(connection.host)
-    if len(sys.argv) < 2:
-        show_usage(pull)
-    groups = sys.argv[1:]
-    for group in groups:
-        mbox = None
-        last = None
-        try:
-            for no, message in connection.fetch(group, start=config[group]):
-                if not mbox:
-                    mbox = mailbox.mbox(group, create = True)
-                    mbox.lock()
-                last = no
-                message = '\n'.join(message)
-                mbox.add(message)
-        finally:
-            if mbox:
-                mbox.close()
-        if last is not None:
-            config[group] = last + 1
 
-def push(connection):
+    def __init__(self, argv):
+        if len(sys.argv) < 2:
+            show_usage(pull)
+        self.groups = sys.argv[1:]
+
+    def __call__(self, connection):
+        config = Config(connection.host)
+        for group in self.groups:
+            mbox = None
+            last = None
+            try:
+                for no, message in connection.fetch(group, start=config[group]):
+                    if not mbox:
+                        mbox = mailbox.mbox(group, create = True)
+                        mbox.lock()
+                    last = no
+                    message = '\n'.join(message)
+                    mbox.add(message)
+            finally:
+                if mbox:
+                    mbox.close()
+            if last is not None:
+                config[group] = last + 1
+
+class Push(Command):
+
     '''
     nntp-push [options]
     '''
-    if len(sys.argv) != 1:
-        show_usage(push)
-    connection.post(sys.stdin)
+
+    def __init__(self, argv):
+        if len(sys.argv) != 1:
+            show_usage(push)
+
+    def __call__(self, connection):
+        connection.post(sys.stdin)
 
 def show_usage(command = None):
     logging.info('Usage: ')
@@ -152,8 +170,8 @@ def show_usage(command = None):
     sys.exit(1)
 
 COMMANDS = dict(
-    pull = pull,
-    push = push,
+    pull = Pull,
+    push = Push,
 )
 
 if __name__ == '__main__':
@@ -175,6 +193,7 @@ if __name__ == '__main__':
     except ValueError:
         logging.error('Unknown command: %r.', command)
         sys.exit(4)
+    cmd = cmd(sys.argv)
     try:
         logging.info('Connecting to %r...', host)
         connection = Connection(host)
