@@ -162,7 +162,7 @@ class Push(Command):
 def show_usage(command = None):
     logging.info('Usage: ')
     if command is None:
-        commands = COMMANDS
+        commands = COMMANDS.values()
     else:
         commands = (command,)
     for command in commands:
