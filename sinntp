@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
     host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
     if not host:
-        logging.error('NNTP server is not specified.')
+        sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
 
     argv = sys.argv[:]
@@ -213,7 +213,7 @@ if __name__ == '__main__':
     try:
         [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
     except ValueError:
-        logging.error('Unknown command: %r.', command)
+        sys.stderr.write('Unknown command: %r.\n' % command)
         sys.exit(4)
     sys.argv = ['nntp-' + cmd.NAME]
     cmd = cmd(argv)
