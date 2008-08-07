@@ -20,6 +20,7 @@ __version__ = '0.100'
 from nntplib import NNTP, NNTPTemporaryError
 import errno
 import logging
+import logging.handlers
 import mailbox
 import optparse
 import os
@@ -189,14 +190,26 @@ def show_usage():
         sys.stderr.write('    %s\n' % command.__doc__.strip())
     sys.exit(1)
 
+def setup_logging(syslog, verbose):
+    logger = logging.getLogger('')
+    format = '%(message)s'
+    if not syslog:
+        handler = logging.handlers.StreamHandler()
+    else:
+        handler = logging.handlers.SysLogHandler('/dev/log')
+        format = ''.join((sys.argv[0], '[%(process)d]: ', format))
+    formatter = logging.Formatter(format, None)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    level = logging.INFO if not verbose else logging.DEBUG
+    logger.setLevel(level)
+
 COMMANDS = dict(
     pull = Pull,
     push = Push,
 )
 
 if __name__ == '__main__':
-    logging.basicConfig(level = logging.INFO, format = '%(message)s')
-
     host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
     if not host:
         sys.stderr.write('NNTP server is not specified.\n')
@@ -216,6 +229,7 @@ if __name__ == '__main__':
         sys.exit(4)
     sys.argv = ['nntp-' + cmd.NAME]
     cmd = cmd(argv)
+    setup_logging(cmd.options.syslog, cmd.options.verbose)
     try:
         logging.info('Connecting to %r...', host)
         connection = Connection(host)
