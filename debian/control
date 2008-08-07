@@ -8,7 +8,7 @@ Bugs: mailto:ubanus@users.sf.net
 Vcs-Browser: http://code.icomputing.pl/hgwebdir.cgi/sinntp/
 
 Package: sinntp
-Architecture: any
+Architecture: all
 Suggests: news-transport-system, news-reader
 Depends: ${python:Depends}
 Description: Handy NNTP to mbox tool
