@@ -113,7 +113,7 @@ class Connection(NNTP):
 class Command(object):
 
     def get_option_parser(self):
-        o = optparse.OptionParser(usage = self.__doc__, version = '%prog ' + __version__)
+        o = optparse.OptionParser(usage = self.__doc__.rstrip(), version = '%prog ' + __version__)
         o.add_option('-s', '--syslog', dest='syslog', action='store_true')
         o.add_option('-v', '--verbose', dest='verbose', action='store_true')
         o.add_option('-p', '--plugin', dest='plugins', action='append')
