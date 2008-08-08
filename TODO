@@ -1,4 +1,4 @@
-* ``Command.__init__()`` should not exit.
-* Implement ``--limit N`` options.
+* Implement the ``--plugin`` option.
+* A verbose message for each downloaded message.
 
 .. vim:ft=rst
