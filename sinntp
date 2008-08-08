@@ -84,38 +84,6 @@ class Config(object):
         finally:
             file.close()
 
-class Connection(NNTP):
-    def fetch(self, group_name, start = 0):
-        logging.info('Looking for group %r.', group_name)
-        response, count, first, last, name = self.group(group_name)
-        count, first, last = (int(x) for x in (count, first, last))
-        i = max(start, first)
-        count = max(last - i + 1, 0)
-        logging.info('%(count)s message%(plural)s to download.' % dict(
-            count = count if count else 'no',
-            plural = 's' if count != 1 else ''
-        ))
-        while i <= last:
-            try:
-                self.stat(str(i))
-            except NNTPTemporaryError, e:
-                i += 1
-            else:
-                break
-        else:
-            return
-        no = str(i)
-        while 1:
-            _, _, message_id, body = self.article(no)
-            logging.debug('Reading message %s.', message_id)
-            yield int(no), body
-            try:
-                _, no, _ = self.next()
-            except NNTPTemporaryError, ex:
-                if ex.response.startswith('421'):
-                    break
-                raise
-
 class Command(object):
 
     def get_option_parser(self):
@@ -162,6 +130,37 @@ class Pull(Command):
         self.groups = self.args
         del self.args
 
+    def fetch(self, connection, group_name, start):
+        logging.info('Looking for group %r.', group_name)
+        response, count, first, last, name = connection.group(group_name)
+        count, first, last = (int(x) for x in (count, first, last))
+        i = max(start, first)
+        count = max(last - i + 1, 0)
+        logging.info('%(count)s message%(plural)s to download.' % dict(
+            count = count if count else 'no',
+            plural = 's' if count != 1 else ''
+        ))
+        while i <= last:
+            try:
+                connection.stat(str(i))
+            except NNTPTemporaryError, e:
+                i += 1
+            else:
+                break
+        else:
+            return
+        no = str(i)
+        while 1:
+            _, _, message_id, body = connection.article(no)
+            logging.debug('Reading message %s.', message_id)
+            yield int(no), body
+            try:
+                _, no, _ = connection.next()
+            except NNTPTemporaryError, ex:
+                if ex.response.startswith('421'):
+                    break
+                raise
+
     def __call__(self, connection):
         config = Config(connection.host)
         for group in self.groups:
@@ -173,9 +172,9 @@ class Pull(Command):
                 last = int(last)
                 start = max(start, last - self.options.limit + 1)
             try:
-                for no, message in connection.fetch(group, start=start):
+                for no, message in self.fetch(connection, group, start):
                     if not mbox:
-                        mbox = mailbox.mbox(group, create = True)
+                        mbox = mailbox.mbox(group, create=True)
                         mbox.lock()
                     last = no
                     message = '\n'.join(message)
@@ -271,7 +270,7 @@ if __name__ == '__main__':
     setup_logging(command.options.syslog, command.options.verbose)
     try:
         logging.info('Connecting to %r...', host)
-        connection = Connection(host)
+        connection = NNTP(host)
     except socket.error, e:
         logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
