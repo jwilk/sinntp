@@ -85,8 +85,7 @@ class Connection(NNTP):
         count, first, last = (int(x) for x in (count, first, last))
         i = max(start, first)
         count = max(last - i + 1, 0)
-        logging.info('There %(be)s %(count)s new mesage%(plural)s.' % dict(
-            be = 'are' if count != 1 else 'is',
+        logging.info('%(count)s message%(plural)s to download.' % dict(
             count = count if count else 'no',
             plural = 's' if count != 1 else ''
         ))
