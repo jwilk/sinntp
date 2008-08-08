@@ -137,6 +137,7 @@ class Pull(Command):
     def get_option_parser(self):
         o = Command.get_option_parser(self)
         o.add_option('--limit', dest='limit', type='int', action='store')
+        o.add_option('--reget', dest='reget', action='store_true')
         return o
 
     def __init__(self, argv):
@@ -152,7 +153,7 @@ class Pull(Command):
         for group in self.groups:
             mbox = None
             last = None
-            start = config[group]
+            start = config[group] if not self.options.reget else 0
             if self.options.limit is not None:
                 _, _, _, last, _ = connection.group(group)
                 last = int(last)
