@@ -136,7 +136,6 @@ class Pull(Command):
 
     def get_option_parser(self):
         o = Command.get_option_parser(self)
-        o.add_option('--no-limit', dest='limit', action='store_const', const=None)
         o.add_option('--limit', dest='limit', type='int', action='store')
         return o
 

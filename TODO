@@ -1,4 +1,4 @@
 * ``Command.__init__()`` should not exit.
-* Implement ``--limit N`` and ``--no-limit`` options.
+* Implement ``--limit N`` options.
 
 .. vim:ft=rst
