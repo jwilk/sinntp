@@ -84,7 +84,7 @@ class Connection(NNTP):
         response, count, first, last, name = self.group(group_name)
         count, first, last = (int(x) for x in (count, first, last))
         i = max(start, first)
-        count = max(last - i, 0)
+        count = max(last - i + 1, 0)
         logging.info('There %(be)s %(count)s new mesage%(plural)s.' % dict(
             be = 'are' if count != 1 else 'is',
             count = count if count else 'no',
