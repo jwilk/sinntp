@@ -202,7 +202,7 @@ class Push(Command):
     def __call__(self, connection):
         message = email.message_from_file(sys.stdin)
         for plugin in self.plugins:
-            plugin(message)
+            plugin(message = message)
         buffer = StringIO()
         generator = email.generator.Generator(buffer, mangle_from_=False)
         generator.flatten(message)
