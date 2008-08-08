@@ -193,7 +193,7 @@ def setup_logging(syslog, verbose):
     logger = logging.getLogger('')
     format = '%(message)s'
     if not syslog:
-        handler = logging.handlers.StreamHandler()
+        handler = logging.StreamHandler()
     else:
         handler = logging.handlers.SysLogHandler('/dev/log')
         format = ''.join((sys.argv[0], '[%(process)d]: ', format))
