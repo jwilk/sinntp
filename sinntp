@@ -178,6 +178,9 @@ class Pull(Command):
                         mbox.lock()
                     last = no
                     message = '\n'.join(message)
+                    message = email.message_from_string(message)
+                    for plugin in self.plugins:
+                        plugin(message = message)
                     mbox.add(message)
             finally:
                 if mbox:
