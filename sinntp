@@ -18,7 +18,11 @@ __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '0.100'
 
 from nntplib import NNTP, NNTPTemporaryError
+from cStringIO import StringIO
+import email
+import email.generator
 import errno
+import functools
 import logging
 import logging.handlers
 import mailbox
@@ -27,6 +31,8 @@ import os
 import os.path
 import socket
 import sys
+
+import plugins
 
 def monkey_patch_mailbox_module():
     '''
@@ -122,6 +128,13 @@ class Command(object):
     def __init__(self, argv):
         oparser = self.get_option_parser()
         self.options, self.args = oparser.parse_args(argv)
+        self.plugins = []
+        for spec in self.options.plugins or ():
+            spec = spec.split(':')
+            name = spec.pop(0)
+            args = [arg for arg in spec if '=' not in arg]
+            kwargs = dict(arg.split('=', 1) for arg in spec if '=' in arg)
+            self.plugins += functools.partial(plugins.__dict__[name], *args, **kwargs),
         self.oparser = oparser
 
     def __call__(self):
@@ -188,7 +201,14 @@ class Push(Command):
             self.oparser.error('No arguments are expected')
 
     def __call__(self, connection):
-        connection.post(sys.stdin)
+        message = email.message_from_file(sys.stdin)
+        for plugin in self.plugins:
+            plugin(message)
+        buffer = StringIO()
+        generator = email.generator.Generator(buffer, mangle_from_=False)
+        generator.flatten(message)
+        buffer.seek(0)
+        connection.post(buffer)
 
 class BaseCommand(Command):
 
