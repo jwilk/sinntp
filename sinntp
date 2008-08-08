@@ -100,7 +100,8 @@ class Connection(NNTP):
             return
         no = str(i)
         while 1:
-            _, _, _, body = self.article(no)
+            _, _, message_id, body = self.article(no)
+            logging.debug('Reading message %s.', message_id)
             yield int(no), body
             try:
                 _, no, _ = self.next()
