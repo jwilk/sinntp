@@ -152,8 +152,13 @@ class Pull(Command):
         for group in self.groups:
             mbox = None
             last = None
+            start = config[group]
+            if self.options.limit is not None:
+                _, _, _, last, _ = connection.group(group)
+                last = int(last)
+                start = max(start, last - self.options.limit + 1)
             try:
-                for no, message in connection.fetch(group, start=config[group]):
+                for no, message in connection.fetch(group, start=start):
                     if not mbox:
                         mbox = mailbox.mbox(group, create = True)
                         mbox.lock()
