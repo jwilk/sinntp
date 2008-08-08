@@ -142,7 +142,8 @@ class Pull(Command):
 
     def __init__(self, argv):
         Command.__init__(self, argv)
-        assert self.args.pop(0) == self.NAME
+        name = self.args.pop(0)
+        assert name == self.NAME
         if not self.args:
             self.oparser.error('At least one group name is required')
         self.groups = self.args
@@ -181,7 +182,8 @@ class Push(Command):
 
     def __init__(self, argv):
         oparser = Command.__init__(self, argv)
-        assert self.args.pop(0) == self.NAME
+        name = self.args.pop(0)
+        assert name == self.NAME
         if self.args:
             self.oparser.error('No arguments are expected')
 
