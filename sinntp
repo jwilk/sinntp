@@ -143,6 +143,7 @@ class Pull(Command):
 
     def __init__(self, argv):
         Command.__init__(self, argv)
+        assert self.args.pop(0) == self.NAME
         if not self.args:
             self.oparser.error('At least one group name is required')
         self.groups = self.args
@@ -177,11 +178,38 @@ class Push(Command):
 
     def __init__(self, argv):
         oparser = Command.__init__(self, argv)
+        assert self.args.pop(0) == self.NAME
         if self.args:
             self.oparser.error('No arguments are expected')
 
     def __call__(self, connection):
         connection.post(sys.stdin)
+
+class BaseCommand(Command):
+
+
+    COMMANDS = dict(
+        pull = Pull,
+        push = Push,
+    )
+
+    __doc__ = ''.join(command.__doc__.rstrip() for command in COMMANDS.itervalues())
+
+    def get_option_parser(self):
+        oparser = Command.get_option_parser(self)
+        oparser.disable_interspersed_args()
+        return oparser
+
+    def __init__(self, argv):
+        oparser = Command.__init__(self, argv)
+        if not self.args:
+            self.oparser.error('A command is expected')
+        command_name = self.args[0]
+        try:
+            self.command_class = self.COMMANDS[command_name]
+        except KeyError:
+            self.oparser.error('Unknown command: %r.\n' % command_name)
+        sys.argv[0] = 'nntp-%s' % command_name
 
 def show_usage():
     sys.stderr.write('Usage: \n')
@@ -203,11 +231,6 @@ def setup_logging(syslog, verbose):
     level = logging.INFO if not verbose else logging.DEBUG
     logger.setLevel(level)
 
-COMMANDS = dict(
-    pull = Pull,
-    push = Push,
-)
-
 if __name__ == '__main__':
     host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
     if not host:
@@ -215,20 +238,13 @@ if __name__ == '__main__':
         sys.exit(2)
 
     argv = sys.argv[:]
-    command = os.path.basename(argv.pop(0))
-    if command == 'sinntp':
-        try:
-            command = argv.pop(0)
-        except IndexError:
-            show_usage()
-    try:
-        [cmd] = [cmd for affix, cmd in COMMANDS.iteritems() if affix in command]
-    except ValueError:
-        sys.stderr.write('Unknown command: %r.\n' % command)
-        sys.exit(4)
-    sys.argv = ['nntp-' + cmd.NAME]
-    cmd = cmd(argv)
-    setup_logging(cmd.options.syslog, cmd.options.verbose)
+    argv0 = os.path.basename(argv.pop(0))
+    if '-' in argv0:
+        command_name = command.rsplit('-', 1)
+        argv.insert(0, command_name)
+    base_command = BaseCommand(argv)
+    command = base_command.command_class(argv)
+    setup_logging(command.options.syslog, command.options.verbose)
     try:
         logging.info('Connecting to %r...', host)
         connection = Connection(host)
@@ -236,7 +252,7 @@ if __name__ == '__main__':
         logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
     try:
-        cmd(connection)
+        command(connection)
     finally:
         connection.quit()
         logging.info('Connection to %r closed.', host)
