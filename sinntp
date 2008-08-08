@@ -128,7 +128,6 @@ class Command(object):
         pass
 
 class Pull(Command):
-
     '''
     nntp-pull [options] groupname [groupname ...]
     '''
@@ -169,7 +168,6 @@ class Pull(Command):
                 config[group] = last + 1
 
 class Push(Command):
-
     '''
     nntp-push [options]
     '''
@@ -186,7 +184,6 @@ class Push(Command):
         connection.post(sys.stdin)
 
 class BaseCommand(Command):
-
 
     COMMANDS = dict(
         pull = Pull,
