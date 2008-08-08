@@ -178,7 +178,6 @@ class Push(Command):
     def __init__(self, argv):
         oparser = Command.__init__(self, argv)
         if self.args:
-            print self.args
             self.oparser.error('No arguments are expected')
 
     def __call__(self, connection):
