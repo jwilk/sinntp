@@ -1,2 +1,5 @@
+* Support for the ``gropupname>filename`` syntax.
+* Documentation for plugins.
+* Upgrade documentation.
 
 .. vim:ft=rst
