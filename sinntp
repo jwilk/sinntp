@@ -91,6 +91,7 @@ class Command(object):
         o.add_option('-s', '--syslog', dest='syslog', action='store_true')
         o.add_option('-v', '--verbose', dest='verbose', action='store_true')
         o.add_option('-p', '--plugin', dest='plugins', action='append')
+        o.add_option('-S', '--server', dest='server', action='store')
         return o
 
     def __init__(self, argv):
@@ -270,7 +271,8 @@ if __name__ == '__main__':
     base_command = BaseCommand(argv)
     command = base_command.command_class(argv)
     setup_logging(command.options.syslog, command.options.verbose)
-    host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
+    host = command.options.server or os.getenv('NNTPSERVER') or \
+        file('/etc/news/server').readline().strip()
     if not host:
         logging.error('NNTP server is not specified.')
         sys.exit(2)
