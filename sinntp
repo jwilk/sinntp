@@ -239,7 +239,7 @@ class BaseCommand(Command):
         try:
             self.command_class = self.COMMANDS[command_name]
         except KeyError:
-            self.oparser.error('Unknown command: %r.\n' % command_name)
+            self.oparser.error('Unknown command: %r.' % command_name)
         sys.argv[0] = 'nntp-%s' % command_name
 
 def show_usage():
