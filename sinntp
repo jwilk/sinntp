@@ -138,7 +138,7 @@ class Pull(Command):
         i = max(start, first)
         count = max(last - i + 1, 0)
         logging.info('%(count)s message%(plural)s to download.' % dict(
-            count = count if count else 'no',
+            count = count if count else 'No',
             plural = 's' if count != 1 else ''
         ))
         while i <= last:
