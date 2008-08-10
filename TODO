@@ -1,3 +1,4 @@
+* Assure that after write: atime < mtime.
 * Documentation for plugins.
 * Upgrade documentation.
 
