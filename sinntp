@@ -274,7 +274,7 @@ if __name__ == '__main__':
     host = command.options.server or os.getenv('NNTPSERVER') or \
         file('/etc/news/server').readline().strip()
     if not host:
-        logging.error('NNTP server is not specified.')
+        sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
     try:
         logging.info('Connecting to %r...', host)
