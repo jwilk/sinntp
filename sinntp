@@ -110,7 +110,7 @@ class Command(object):
 
 class Pull(Command):
     '''
-    nntp-pull [options] groupname [groupname ...]
+    nntp-pull [options] groupname[>filename] [groupname[>filename] ...]
     '''
 
     NAME = 'pull'
@@ -164,6 +164,10 @@ class Pull(Command):
     def __call__(self, connection):
         config = Config(connection.host)
         for group in self.groups:
+            if '>' in group:
+                group, mbox_name = group.split('>', 1)
+            else:
+                mbox_name = group
             mbox = None
             last = None
             start = config[group] if not self.options.reget else 0
@@ -174,7 +178,7 @@ class Pull(Command):
             try:
                 for no, message in self.fetch(connection, group, start):
                     if not mbox:
-                        mbox = mailbox.mbox(group, create=True)
+                        mbox = mailbox.mbox(mbox_name, create=True)
                         mbox.lock()
                     last = no
                     message = '\n'.join(message)
