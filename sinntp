@@ -270,7 +270,7 @@ if __name__ == '__main__':
     argv = sys.argv[:]
     argv0 = os.path.basename(argv.pop(0))
     if '-' in argv0:
-        command_name = command.rsplit('-', 1)
+        [_, command_name] = argv0.rsplit('-', 1)
         argv.insert(0, command_name)
     base_command = BaseCommand(argv)
     command = base_command.command_class(argv)
