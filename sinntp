@@ -262,11 +262,6 @@ def setup_logging(syslog, verbose):
     logger.setLevel(level)
 
 if __name__ == '__main__':
-    host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
-    if not host:
-        sys.stderr.write('NNTP server is not specified.\n')
-        sys.exit(2)
-
     argv = sys.argv[:]
     argv0 = os.path.basename(argv.pop(0))
     if '-' in argv0:
@@ -275,6 +270,10 @@ if __name__ == '__main__':
     base_command = BaseCommand(argv)
     command = base_command.command_class(argv)
     setup_logging(command.options.syslog, command.options.verbose)
+    host = os.getenv('NNTPSERVER') or file('/etc/news/server').readline().strip()
+    if not host:
+        logging.error('NNTP server is not specified.')
+        sys.exit(2)
     try:
         logging.info('Connecting to %r...', host)
         connection = NNTP(host)
