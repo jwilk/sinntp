@@ -181,7 +181,9 @@ class Pull(Command):
                     if not mbox:
                         mbox = mailbox.mbox(mbox_name, create=True)
                         mbox.lock()
-                        atime = os.stat(mbox_name).st_atime
+                        stat = os.stat(mbox_name)
+                        atime = stat.st_atime
+                        mode = stat.st_mode
                     last = no
                     message = '\n'.join(message)
                     message = email.message_from_string(message)
@@ -193,6 +195,7 @@ class Pull(Command):
                     mbox.close()
                     mtime = os.stat(mbox_name).st_mtime
                     os.utime(mbox_name, (atime, mtime))
+                    os.chmod(mbox_name, mode)
             if last is not None:
                 config[group] = last + 1
 
