@@ -3,12 +3,12 @@ sinntp manual
 =============
 
 Description
------------
+===========
 
 ``sinntp`` is a tiny non-interactive NNTP client.
 
 Global options
---------------
+==============
 
 --version                         show program's version number and exit
 -h, --help                        show help message
@@ -18,57 +18,58 @@ Global options
 -S SERVER, --server=SERVER        specify server address
 -U USERNAME, --username=USERNAME  specify username
 -P PASSWORD, --password=PASSWORD  specify password
-
+  
 Commands
---------
+========
 
 ``pull``
-~~~~~~~~
-
+--------
 Fetch messages from the server and save them into the mailbox.
-
+    
 Arguments
-'''''''''
-``pull`` takes every argument as a name of group, optionally followed by ``'>'`` character and mbox filename.
+~~~~~~~~~
+Every argument is supposed to be a name of group, optionally followed by
+'``>``' character and mbox filename.
 
 Options
-'''''''
-
---limit=N             pull at most N messages
---reget               start from the first available message
-
+~~~~~~~
+--limit=N   pull at most N messages
+--reget     start from the first available message
+    
 ``push``
-~~~~~~~~
-
-Send message from stdin to the server. Destination groups should be specified in the ``Newsgroups:`` header.
+--------
+Send message from stdin to the server. Destination groups should be
+specified in the ``Newsgroups:`` header.
 
 Arguments
-'''''''''
-
+~~~~~~~~~
 This command takes no arguments.
 
 Options
-'''''''
-
+~~~~~~~
 This command has no options.
 
 Environment variables
----------------------
+=====================
 
 ``NNTPSERVER``
-    This variable specifies default server. It can be overriden by ``-S`` option.
+    This variable specifies default server. It can be overriden by ``-S``
+    option.
 
 ``SINNTP_HOME``
-    This variable specifies the root directory for ``sinntp`` (default: ``~/.sinntp/``)
+    This variable specifies the root directory for ``sinntp`` (default:
+    ``~/.sinntp/``)
 
 Files
------
+=====
 
 ``/etc/news/server``
-    A file with NNTP server address. Can be overriden by ``NNTPSERVER`` or ``-S`` option.
+    A file with NNTP server address. Can be overriden by ``NNTPSERVER`` or
+    ``-S`` option.
 
 Copyright
----------
+=========
+
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License, version 2, as 
 published by the Free Software Foundation.
@@ -79,7 +80,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 Authors
--------
+=======
+
 Copyright © 2008
 
  * Piotr Lewandowski <piotr.lewandowski+sinntp@gmail.com>,
