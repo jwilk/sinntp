@@ -92,6 +92,8 @@ class Command(object):
         o.add_option('-v', '--verbose', dest='verbose', action='store_true')
         o.add_option('-p', '--plugin', dest='plugins', action='append')
         o.add_option('-S', '--server', dest='server', action='store')
+        o.add_option('-U', '--username', dest='username', action='store')
+        o.add_option('-P', '--password', dest='password', action='store')
         return o
 
     def __init__(self, argv):
@@ -284,7 +286,7 @@ if __name__ == '__main__':
         sys.exit(2)
     try:
         logging.info('Connecting to %r...', host)
-        connection = NNTP(host)
+        connection = NNTP(host, user = command.options.username, password = command.options.password)
     except socket.error, e:
         logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
