@@ -88,12 +88,12 @@ class Command(object):
 
     def get_option_parser(self):
         o = optparse.OptionParser(usage = self.__doc__.rstrip(), version = '%prog ' + __version__)
-        o.add_option('-s', '--syslog', dest='syslog', action='store_true')
-        o.add_option('-v', '--verbose', dest='verbose', action='store_true')
-        o.add_option('-p', '--plugin', dest='plugins', action='append')
-        o.add_option('-S', '--server', dest='server', action='store')
-        o.add_option('-U', '--username', dest='username', action='store')
-        o.add_option('-P', '--password', dest='password', action='store')
+        o.add_option('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
+        o.add_option('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
+        o.add_option('-p', '--plugin', dest='plugins', action='append', metavar='PLUGIN', help='use plugin')
+        o.add_option('-S', '--server', dest='server', action='store', help='specify server address')
+        o.add_option('-U', '--username', dest='username', action='store', help='specify username')
+        o.add_option('-P', '--password', dest='password', action='store', help='specify password')
         return o
 
     def __init__(self, argv):
@@ -120,8 +120,8 @@ class Pull(Command):
 
     def get_option_parser(self):
         o = Command.get_option_parser(self)
-        o.add_option('--limit', dest='limit', type='int', action='store')
-        o.add_option('--reget', dest='reget', action='store_true')
+        o.add_option('--limit', dest='limit', type='int', action='store', metavar='N', help='pull at most N messages')
+        o.add_option('--reget', dest='reget', action='store_true', help='start from the first available message')
         return o
 
     def __init__(self, argv):
