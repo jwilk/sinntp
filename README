@@ -7,6 +7,7 @@ Description
 
 ``sinntp`` is a tiny non-interactive NNTP client.
 
+
 Global options
 ==============
 
@@ -19,6 +20,7 @@ Global options
 -U USERNAME, --username=USERNAME  specify username
 -P PASSWORD, --password=PASSWORD  specify password
   
+
 Commands
 ========
 
@@ -27,12 +29,12 @@ Commands
 Fetch messages from the server and save them into the mailbox.
     
 Arguments
-~~~~~~~~~
+`````````
 Every argument is supposed to be a name of group, optionally followed by
-'``>``' character and mbox filename.
+a '``>``' character and mbox filename.
 
 Options
-~~~~~~~
+```````
 --limit=N   pull at most N messages
 --reget     start from the first available message
     
@@ -42,12 +44,13 @@ Send message from stdin to the server. Destination groups should be
 specified in the ``Newsgroups:`` header.
 
 Arguments
-~~~~~~~~~
+`````````
 This command takes no arguments.
 
 Options
-~~~~~~~
+```````
 This command has no options.
+
 
 Environment variables
 =====================
@@ -60,12 +63,14 @@ Environment variables
     This variable specifies the root directory for ``sinntp`` (default:
     ``~/.sinntp/``)
 
+
 Files
 =====
 
 ``/etc/news/server``
     A file with NNTP server address. Can be overriden by ``NNTPSERVER`` or
     ``-S`` option.
+
 
 Copyright
 =========
@@ -78,6 +83,7 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
+
 
 Authors
 =======
