@@ -37,6 +37,11 @@ Options
 ```````
 --limit=N   pull at most N messages
 --reget     start from the first available message
+
+Plugins
+```````
+mimify
+    Add default charset to the message when it is not present.
     
 ``push``
 --------
@@ -51,6 +56,10 @@ Options
 ```````
 This command has no options.
 
+Plugins
+```````
+strip_headers
+    Strip specifed headers from message.
 
 Environment variables
 =====================
