@@ -263,7 +263,10 @@ def setup_logging(syslog, verbose):
     if not syslog:
         handler = logging.StreamHandler()
     else:
-        handler = logging.handlers.SysLogHandler('/dev/log')
+        handler = logging.handlers.SysLogHandler(
+            '/dev/log',
+            facility = logging.handlers.SysLogHandler.LOG_NEWS
+        )
         format = ''.join((sys.argv[0], '[%(process)d]: ', format))
     formatter = logging.Formatter(format, None)
     handler.setFormatter(formatter)
