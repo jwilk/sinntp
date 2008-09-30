@@ -180,7 +180,7 @@ class Pull(Command):
                 start = max(start, last - self.options.limit + 1)
             try:
                 for no, message in self.fetch(connection, group, start):
-                    if not mbox:
+                    if mbox is None:
                         mbox = mailbox.mbox(mbox_name, create=True)
                         mbox.lock()
                         stat = os.stat(mbox_name)
@@ -194,7 +194,7 @@ class Pull(Command):
                         if message is not None:
                             mbox.add(message)
             finally:
-                if mbox:
+                if mbox is not None:
                     mbox.close()
                     mtime = os.stat(mbox_name).st_mtime
                     os.utime(mbox_name, (atime, mtime))
