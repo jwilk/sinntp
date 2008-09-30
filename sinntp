@@ -191,8 +191,10 @@ class Pull(Command):
                     message = email.message_from_string(message)
                     for plugin in self.plugins:
                         message = plugin(message = message)
-                        if message is not None:
-                            mbox.add(message)
+                        if message is None:
+                            break
+                    if message is not None:
+                        mbox.add(message)
             finally:
                 if mbox is not None:
                     mbox.close()
