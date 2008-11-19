@@ -187,6 +187,8 @@ class Pull(Command):
                         atime = stat.st_atime
                         mode = stat.st_mode
                     last = no
+                    if not (message and message[-1].endswith('\n')):
+                        message += ['']
                     message = '\n'.join(message)
                     message = email.message_from_string(message)
                     for plugin in self.plugins:
