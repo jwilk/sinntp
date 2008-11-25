@@ -262,7 +262,7 @@ def show_usage():
     sys.exit(1)
 
 def setup_logging(syslog, verbose):
-    logger = logging.getLogger('')
+    logger = logging.getLogger()
     format = '%(message)s'
     if not syslog:
         handler = logging.StreamHandler()
