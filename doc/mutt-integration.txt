@@ -8,9 +8,10 @@ description of ``mailboxes`` command in Mutt documentation for details.
 Posting to newsgroups requires adding folder hooks:
 
 ::
+
     folder-hook . unmy_hdr To
     folder-hook . unset sendmail
-
+    
     `for group in ${SINNTP_HOME:-$HOME/.sinntp}/*; do \
         group="$(basename $group | cut -d@ -f1)"; \
         echo -n folder-hook \"^${group}$\" \" \
@@ -25,4 +26,4 @@ which matches all folder names. You may want to set a default value there.
 ``autoedit`` variable is also worth noticing when posting to newsgroups since
 ``To:`` header is added automatically in above configuration.
 
-.. vim:ft=rst
+.. vim:ft=rst ts=4 sw=4
