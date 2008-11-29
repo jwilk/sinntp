@@ -220,6 +220,8 @@ class Push(Command):
 
     def __call__(self, connection):
         message = email.message_from_file(sys.stdin)
+        if self.args:
+            message['Newsgroups'] = ','.join(self.args)
         for plugin in self.plugins:
             message = plugin(message = message)
         buffer = StringIO()
