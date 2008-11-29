@@ -217,8 +217,6 @@ class Push(Command):
         oparser = Command.__init__(self, argv)
         name = self.args.pop(0)
         assert name == self.NAME
-        if self.args:
-            self.oparser.error('No arguments are expected')
 
     def __call__(self, connection):
         message = email.message_from_file(sys.stdin)
