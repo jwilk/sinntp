@@ -288,7 +288,7 @@ if __name__ == '__main__':
     command = base_command.command_class(argv)
     setup_logging(command.options.syslog, command.options.verbose)
     host = command.options.server or os.getenv('NNTPSERVER') or \
-        file('/etc/news/server').readline().strip()
+        (os.path.exists('/etc/news/server') and file('/etc/news/server').readline().strip())
     if not host:
         sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
