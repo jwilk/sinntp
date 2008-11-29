@@ -17,7 +17,7 @@
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '0.100'
 
-from nntplib import NNTP, NNTPTemporaryError
+from nntplib import NNTP, NNTPTemporaryError, NNTPError
 from cStringIO import StringIO
 import email
 import email.generator
@@ -300,6 +300,9 @@ if __name__ == '__main__':
         sys.exit(3)
     try:
         command(connection)
+    except NNTPError, e:
+        logging.error('NNTP error: ' + e.message)
+        sys.exit(4)
     finally:
         connection.quit()
         logging.info('Connection to %r closed.', host)
