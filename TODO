@@ -1,4 +1,7 @@
 * Documentation for mutt integration.
+* Handle NNTP exceptions more gracefully.
+* Hooks for writing into compressed files.
 * Upgrade documentation.
+* Add support for sendmail-like syntax.
 
 .. vim:ft=rst
