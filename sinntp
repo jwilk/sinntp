@@ -175,9 +175,8 @@ class Pull(Command):
             last = None
             start = config[group] if not self.options.reget else 0
             if self.options.limit is not None:
-                _, _, _, last, _ = connection.group(group)
-                last = int(last)
-                start = max(start, last - self.options.limit + 1)
+                _, _, _, end, _ = connection.group(group)
+                start = max(start, int(end) - self.options.limit + 1)
             try:
                 for no, message in self.fetch(connection, group, start):
                     if mbox is None:
@@ -186,7 +185,6 @@ class Pull(Command):
                         stat = os.stat(mbox_name)
                         atime = stat.st_atime
                         mode = stat.st_mode
-                    last = no
                     if not (message and message[-1].endswith('\n')):
                         message += ['']
                     message = '\n'.join(message)
@@ -197,14 +195,15 @@ class Pull(Command):
                             break
                     if message is not None:
                         mbox.add(message)
+                    last = no
             finally:
                 if mbox is not None:
                     mbox.close()
                     mtime = os.stat(mbox_name).st_mtime
                     os.utime(mbox_name, (atime, mtime))
                     os.chmod(mbox_name, mode)
-            if last is not None:
-                config[group] = last + 1
+                if last is not None:
+                    config[group] = last + 1
 
 class Push(Command):
     '''
