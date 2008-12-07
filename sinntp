@@ -200,7 +200,8 @@ class Pull(Command):
                 if mbox is not None:
                     mbox.close()
                     mtime = os.stat(mbox_name).st_mtime
-                    os.utime(mbox_name, (atime, mtime))
+                    if atime:
+                        os.utime(mbox_name, (atime, mtime))
                     os.chmod(mbox_name, mode)
                 if last is not None:
                     config[group] = last + 1
