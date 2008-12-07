@@ -172,6 +172,8 @@ class Pull(Command):
             else:
                 mbox_name = group
             mbox = None
+            atime = None
+            mode = None
             last = None
             start = config[group] if not self.options.reget else 0
             if self.options.limit is not None:
@@ -199,10 +201,11 @@ class Pull(Command):
             finally:
                 if mbox is not None:
                     mbox.close()
-                    mtime = os.stat(mbox_name).st_mtime
-                    if atime:
+                    if atime is not None:
+                        mtime = os.stat(mbox_name).st_mtime
                         os.utime(mbox_name, (atime, mtime))
-                    os.chmod(mbox_name, mode)
+                    if mode is not None:
+                        os.chmod(mbox_name, mode)
                 if last is not None:
                     config[group] = last + 1
 
