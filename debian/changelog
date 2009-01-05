@@ -1,5 +1,5 @@
-sinntp (0.100) UNRELEASED; urgency=low
+sinntp (1.0) UNRELEASED; urgency=low
 
   * Rewritten from scratch in Python.
 
- -- Jakub Wilk <ubanus@users.sf.net>  Sun, 15 Jun 2008 21:58:09 +0200
+ -- Jakub Wilk <ubanus@users.sf.net>  Mon, 05 Jan 2009 13:09:21 +0100
