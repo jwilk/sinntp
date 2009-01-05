@@ -11,4 +11,4 @@ Package: sinntp
 Architecture: all
 Suggests: news-transport-system, news-reader
 Depends: python (>= 2.5), ${misc:Depends}
-Description: Handy NNTP to mbox tool
+Description: Tiny non-interactive NNTP client
