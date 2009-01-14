@@ -2,12 +2,12 @@ Source: sinntp
 Section: news
 Priority: extra
 Maintainer: Jakub Wilk <ubanus@users.sf.net>
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 7), python-support
 Standards-Version: 3.8.0
 Bugs: mailto:ubanus@users.sf.net
 Vcs-Browser: http://code.icomputing.pl/hgwebdir.cgi/sinntp/
 
 Package: sinntp
 Architecture: all
-Depends: python (>= 2.5), ${misc:Depends}
+Depends: python (>= 2.5), ${misc:Depends}, ${python:Depends}
 Description: Tiny non-interactive NNTP client
