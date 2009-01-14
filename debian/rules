@@ -14,6 +14,7 @@ install: build
 	dh_install sinntp usr/bin/
 	dh_installdocs debian/changelog.old
 	dh install --remaining
+	sed -i -e '1,/^$$/ {s|^$$|\nimport sys; sys.path.insert(0, "/usr/share/sinntp/")\n|;}' $(CURDIR)/debian/sinntp/usr/bin/*
 
 binary-indep: install
 	dh binary-indep
