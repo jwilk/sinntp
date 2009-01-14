@@ -10,10 +10,7 @@ clean:
 	dh clean
 
 install: build
-	dh install --until dh_prep
-	dh_install sinntp usr/bin/
-	dh_installdocs debian/changelog.old
-	dh install --remaining
+	dh install
 	sed -i -e '1,/^$$/ {s|^$$|\nimport sys; sys.path.insert(0, "/usr/share/sinntp/")\n|;}' $(CURDIR)/debian/sinntp/usr/bin/*
 
 binary-indep: install
