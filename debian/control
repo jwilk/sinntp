@@ -9,6 +9,5 @@ Vcs-Browser: http://code.icomputing.pl/hgwebdir.cgi/sinntp/
 
 Package: sinntp
 Architecture: all
-Suggests: news-transport-system, news-reader
 Depends: python (>= 2.5), ${misc:Depends}
 Description: Tiny non-interactive NNTP client
