@@ -81,8 +81,8 @@ Files
     ``-S`` option.
 
 
-Copyright
-=========
+License
+=======
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License, version 2, as 
@@ -94,10 +94,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 
-Authors
-=======
+Copyrights
+==========
 
-Copyright © 2008
+Copyright © 2008, 2009
 
  * Piotr Lewandowski <piotr.lewandowski+sinntp@gmail.com>,
  * Jakub Wilk <ubanus@users.sf.net>.
