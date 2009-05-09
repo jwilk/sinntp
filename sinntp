@@ -90,6 +90,7 @@ class Command(object):
         o = optparse.OptionParser(usage = self.__doc__.rstrip(), version = '%prog ' + __version__)
         o.add_option('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
         o.add_option('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
+        o.add_option('-q', '--quiet', dest='verbose', action='store_false', help='be less verbose')
         o.add_option('-p', '--plugin', dest='plugins', action='append', metavar='PLUGIN', help='use plugin')
         o.add_option('-S', '--server', dest='server', action='store', help='specify server address')
         o.add_option('-U', '--username', dest='username', action='store', help='specify username')
@@ -278,7 +279,11 @@ def setup_logging(syslog, verbose):
     formatter = logging.Formatter(format, None)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
-    level = logging.INFO if not verbose else logging.DEBUG
+    level = {
+        True:  logging.DEBUG,
+        None:  logging.INFO,
+        False: logging.ERROR,
+    }.get(verbose)
     logger.setLevel(level)
 
 if __name__ == '__main__':
