@@ -218,7 +218,7 @@ class Push(Command):
     NAME = 'push'
 
     def __init__(self, argv):
-        oparser = Command.__init__(self, argv)
+        Command.__init__(self, argv)
         name = self.args.pop(0)
         assert name == self.NAME
 
@@ -249,7 +249,7 @@ class BaseCommand(Command):
         return oparser
 
     def __init__(self, argv):
-        oparser = Command.__init__(self, argv)
+        Command.__init__(self, argv)
         if not self.args:
             self.oparser.error('A command is expected')
         command_name = self.args[0]
