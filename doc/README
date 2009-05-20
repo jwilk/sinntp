@@ -15,6 +15,7 @@ Global options
 -h, --help                        show help message
 -s, --syslog                      use syslog for logging
 -v, --verbose                     be more verbose
+-q, --quiet                       be quiet
 -p PLUGIN, --plugin=PLUGIN        use plugin
 -S SERVER, --server=SERVER        specify server address
 -U USERNAME, --username=USERNAME  specify username
