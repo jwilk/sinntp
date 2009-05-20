@@ -306,7 +306,7 @@ if __name__ == '__main__':
         logging.info('Connecting to %r...', host)
         connection = NNTP(host, user = command.options.username, password = command.options.password)
     except socket.error, e:
-        logging.error('Could not connect to %r: %s', host, e[1])
+        logging.error('Could not connect to %r: %s', host, e.message)
         sys.exit(3)
     try:
         command(connection)
