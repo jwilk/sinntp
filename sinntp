@@ -95,6 +95,7 @@ class Command(object):
         o.add_option('-S', '--server', dest='server', action='store', help='specify server address')
         o.add_option('-U', '--username', dest='username', action='store', help='specify username')
         o.add_option('-P', '--password', dest='password', action='store', help='specify password')
+        o.add_option('-t', '--timeout', dest='timeout', action='store', type='int', help='specify connection timeout')
         return o
 
     def __init__(self, argv):
@@ -300,6 +301,7 @@ if __name__ == '__main__':
     if not host:
         sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
+    socket.setdefaulttimeout(command.options.timeout)
     try:
         logging.info('Connecting to %r...', host)
         connection = NNTP(host, user = command.options.username, password = command.options.password)

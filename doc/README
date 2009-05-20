@@ -19,6 +19,7 @@ Global options
 -S SERVER, --server=SERVER        specify server address
 -U USERNAME, --username=USERNAME  specify username
 -P PASSWORD, --password=PASSWORD  specify password
+-t TIMEOUT, --timeout=TIMEOUT     specify connection timeout
   
 
 Commands
