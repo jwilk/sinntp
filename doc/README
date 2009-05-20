@@ -47,12 +47,14 @@ mimify
     
 ``push``
 --------
-Send message from stdin to the server. Destination groups should be
-specified in the ``Newsgroups:`` header.
+Send message from stdin to the server. Destination groups should be specified
+in the ``Newsgroups:`` header or provided as command-line arguments if the
+``Newsgroups:`` header is missing.
 
 Arguments
 `````````
-This command takes no arguments.
+Every argument is used as a destination newsgroup. Those arguments are ignored
+if a ``Newsgroups:`` header is present in the message.
 
 Options
 ```````

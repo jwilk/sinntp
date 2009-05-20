@@ -213,7 +213,7 @@ class Pull(Command):
 
 class Push(Command):
     '''
-    nntp-push [options]
+    nntp-push [options] [newsgroups...]
     '''
 
     NAME = 'push'
