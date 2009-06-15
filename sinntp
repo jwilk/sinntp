@@ -118,8 +118,6 @@ class Pull(Command):
     nntp-pull [options] groupname[>filename] [groupname[>filename] ...]
     '''
 
-    NAME = 'pull'
-
     def get_option_parser(self):
         o = Command.get_option_parser(self)
         o.add_option('--limit', dest='limit', type='int', action='store', metavar='N', help='pull at most N messages')
@@ -128,8 +126,6 @@ class Pull(Command):
 
     def __init__(self, argv):
         Command.__init__(self, argv)
-        name = self.args.pop(0)
-        assert name == self.NAME
         if not self.args:
             self.oparser.error('At least one group name is required')
         self.groups = self.args
@@ -216,13 +212,6 @@ class Push(Command):
     nntp-push [options] [newsgroups...]
     '''
 
-    NAME = 'push'
-
-    def __init__(self, argv):
-        Command.__init__(self, argv)
-        name = self.args.pop(0)
-        assert name == self.NAME
-
     def __call__(self, connection):
         message = email.message_from_file(sys.stdin)
         if not 'Newsgroups' in message and self.args:
@@ -294,6 +283,7 @@ if __name__ == '__main__':
         [_, command_name] = argv0.rsplit('-', 1)
         argv.insert(0, command_name)
     base_command = BaseCommand(argv)
+    del argv[0]
     command = base_command.command_class(argv)
     setup_logging(command.options.syslog, command.options.verbose)
     host = command.options.server or os.getenv('NNTPSERVER') or \
