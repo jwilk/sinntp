@@ -321,6 +321,9 @@ if __name__ == '__main__':
     except socket.error, e:
         logging.error('Could not connect to %r: %s', host, e.message)
         sys.exit(3)
+    except NNTPError, e:
+        logging.error('%r returned an error: %s', host, e.message)
+        sys.exit(4)
     try:
         command(connection)
     except NNTPError, e:
