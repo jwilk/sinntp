@@ -224,11 +224,34 @@ class Push(Command):
         buffer.seek(0)
         connection.post(buffer)
 
+class Get(Command):
+    '''
+    nntp-get message-id
+    '''
+
+    def __init__(self, argv):
+        Command.__init__(self, argv)
+        if len(self.args) != 1:
+            self.oparser.error('A single message-id is required')
+        [self.message_id] = self.args
+        if '@' not in self.message_id:
+            self.oparser.error('Message-id is malformed (\'@\' is missing)')
+        if self.message_id[0] + self.message_id[-1] != '<>':
+            self.message_id = '<%s>' % self.message_id
+        del self.args
+
+    def __call__(self, connection):
+        logging.debug('Reading message %s.', self.message_id)
+        _, _, _, message = connection.article(self.message_id)
+        message = '\n'.join(message)
+        print message
+
 class BaseCommand(Command):
 
     COMMANDS = dict(
         pull = Pull,
         push = Push,
+        get = Get,
     )
 
     __doc__ = ''.join(command.__doc__.rstrip() for command in COMMANDS.itervalues())
