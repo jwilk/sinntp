@@ -1,11 +1,13 @@
-sinntp (1.1) UNRELEASED; urgency=low
+sinntp (1.1) unstable; urgency=low
 
   * Add the --quiet option.
   * Add the --timeout option.
   * Handle socket exceptions gracefully.
+  * Handle connection NNTP errors gracefully.
   * Allow to provide newsgroup names as arguments for nntp-push.
+  * Introduce the 'get' command and provide nntp-get symlink.
 
- -- Jakub Wilk <ubanus@users.sf.net>  Fri, 05 Jun 2009 11:05:51 +0200
+ -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Tue, 16 Jun 2009 15:09:53 +0200
 
 sinntp (1.0) unstable; urgency=low
 
