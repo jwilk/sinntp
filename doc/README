@@ -65,6 +65,15 @@ Plugins
 strip_headers
     Strip specifed headers from message.
 
+``get``
+-------
+Retrieve a message specified by a ``Message-ID`` header from the server.
+
+Arguments
+`````````
+A single argument should be a message identificator (``Message-ID``).
+
+
 Environment variables
 =====================
 
