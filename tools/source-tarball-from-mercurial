@@ -16,3 +16,4 @@ hg archive -r "$version" "$sourceroot/$name-$version"
 cd "$sourceroot"
 rm -Rf */.hg*
 tar $tarflags -czf "$pwd/$name-$version.tar.gz" */
+rm -Rf "$sourceroot"
