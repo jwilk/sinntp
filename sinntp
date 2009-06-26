@@ -101,6 +101,7 @@ class Command(object):
     def __init__(self, argv):
         oparser = self.get_option_parser()
         self.options, self.args = oparser.parse_args(argv)
+        self.command_name = self.args.pop(0)
         self.plugins = []
         for spec in self.options.plugins or ():
             spec = spec.split(':')
@@ -265,12 +266,11 @@ class BaseCommand(Command):
         Command.__init__(self, argv)
         if not self.args:
             self.oparser.error('A command is expected')
-        command_name = self.args[0]
         try:
-            self.command_class = self.COMMANDS[command_name]
+            self.command_class = self.COMMANDS[self.command_name]
         except KeyError:
-            self.oparser.error('Unknown command: %r.' % command_name)
-        sys.argv[0] = 'nntp-%s' % command_name
+            self.oparser.error('Unknown command: %r.' % self.command_name)
+        sys.argv[0] = 'nntp-%s' % self.command_name
 
 def show_usage():
     sys.stderr.write('Usage: \n')
@@ -306,7 +306,7 @@ if __name__ == '__main__':
         [_, command_name] = argv0.rsplit('-', 1)
         argv.insert(0, command_name)
     base_command = BaseCommand(argv)
-    command = base_command.command_class(base_command.args[1:])
+    command = base_command.command_class(argv)
     setup_logging(command.options.syslog, command.options.verbose)
     host = command.options.server or os.getenv('NNTPSERVER') or \
         (os.path.exists('/etc/news/server') and file('/etc/news/server').readline().strip())
