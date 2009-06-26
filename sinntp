@@ -306,8 +306,7 @@ if __name__ == '__main__':
         [_, command_name] = argv0.rsplit('-', 1)
         argv.insert(0, command_name)
     base_command = BaseCommand(argv)
-    del argv[0]
-    command = base_command.command_class(argv)
+    command = base_command.command_class(base_command.args[1:])
     setup_logging(command.options.syslog, command.options.verbose)
     host = command.options.server or os.getenv('NNTPSERVER') or \
         (os.path.exists('/etc/news/server') and file('/etc/news/server').readline().strip())
