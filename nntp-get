@@ -1,1 +1,2 @@
-sinntp
+#!/bin/sh
+exec "${0%/*}/sinntp" "${0##*-}" "$@"

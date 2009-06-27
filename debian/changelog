@@ -1,6 +1,10 @@
 sinntp (1.1.1) UNRELEASED; urgency=low
 
+  [ Piotr Lewandowski ]
   * Fix command line arguments parsing.
+
+  [ Jakub Wilk ]
+  * Don't use symlinks.
 
  -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Sat, 27 Jun 2009 17:16:36 +0200
 

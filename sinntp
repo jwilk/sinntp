@@ -300,11 +300,7 @@ def setup_logging(syslog, verbose):
     logger.setLevel(level)
 
 if __name__ == '__main__':
-    argv = sys.argv[:]
-    argv0 = os.path.basename(argv.pop(0))
-    if '-' in argv0:
-        [_, command_name] = argv0.rsplit('-', 1)
-        argv.insert(0, command_name)
+    argv = sys.argv[1:]
     base_command = BaseCommand(argv)
     command = base_command.command_class(argv)
     setup_logging(command.options.syslog, command.options.verbose)
