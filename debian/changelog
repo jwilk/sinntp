@@ -1,3 +1,9 @@
+sinntp (1.1.1) UNRELEASED; urgency=low
+
+  * Fix command line arguments parsing.
+
+ -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Sat, 27 Jun 2009 17:16:36 +0200
+
 sinntp (1.1) unstable; urgency=low
 
   * Add the --quiet option.
