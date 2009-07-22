@@ -73,6 +73,18 @@ Arguments
 `````````
 A single argument should be a message identificator (``Message-ID``).
 
+``list``
+--------
+Retrieve a list of groups from the server.
+
+Arguments
+``````````
+This command takes no arguments.
+
+Opitons
+```````
+This command takes no options.
+
 
 Environment variables
 =====================

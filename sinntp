@@ -247,12 +247,27 @@ class Get(Command):
         message = '\n'.join(message)
         print message
 
+class List(Command):
+    '''
+    nntp-list
+    '''
+
+    def __init__(self, argv):
+        Command.__init__(self, argv)
+        if len(self.args) != 0:
+            self.oparser.error('This command takes no arguments')
+
+    def __call__(self, connection):
+        _, groups = connection.list()
+        print '\n'.join(group for group, _, _, flag in groups)
+
 class BaseCommand(Command):
 
     COMMANDS = dict(
         pull = Pull,
         push = Push,
         get = Get,
+        list = List,
     )
 
     __doc__ = ''.join(command.__doc__.rstrip() for command in COMMANDS.itervalues())
