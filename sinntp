@@ -101,7 +101,10 @@ class Command(object):
     def __init__(self, argv):
         oparser = self.get_option_parser()
         self.options, self.args = oparser.parse_args(argv)
-        self.command_name = self.args.pop(0)
+        try:
+            self.command_name = self.args.pop(0)
+        except IndexError:
+            oparser.error('A command is expected')
         self.plugins = []
         for spec in self.options.plugins or ():
             spec = spec.split(':')
@@ -279,8 +282,6 @@ class BaseCommand(Command):
 
     def __init__(self, argv):
         Command.__init__(self, argv)
-        if not self.args:
-            self.oparser.error('A command is expected')
         try:
             self.command_class = self.COMMANDS[self.command_name]
         except KeyError:
