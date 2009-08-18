@@ -1,3 +1,10 @@
+sinntp (1.2) unstable; urgency=low
+
+  * Introduce the 'list' command.
+  * Fix command name parsing.
+
+ -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Tue, 18 Aug 2009 18:33:18 +0200
+
 sinntp (1.1.1) unstable; urgency=low
 
   [ Piotr Lewandowski ]
