@@ -13,9 +13,9 @@ Package: sinntp
 Architecture: all
 Depends: python (>= 2.5), ${misc:Depends}, ${python:Depends}
 Description: Tiny non-interactive NNTP client
-  sinntp is a tiny NNTP client originally designed to work in non-interactive
-  mode. Following operations are supported:
-    - sending articles to the server,
-    - fetching new articles to the mbox file,
-    - downloading individual messages in RFC822 format,
-    - listing available newsgroups.
+ sinntp is a tiny NNTP client originally designed to work in non-interactive
+ mode. Following operations are supported:
+   - sending articles to the server,
+   - fetching new articles to the mbox file,
+   - downloading individual messages in RFC822 format,
+   - listing available newsgroups.
