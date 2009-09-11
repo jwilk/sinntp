@@ -1,3 +1,0 @@
-sinntp	usr/bin/
-nntp-*	usr/bin/
-*.py	usr/share/sinntp/
