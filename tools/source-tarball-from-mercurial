@@ -1,4 +1,5 @@
 #!/bin/sh
+name=sinntp
 if [ $# -ne 1 ]
 then
   printf '%s <version>\n' "$0" >&2
@@ -6,7 +7,6 @@ then
 fi
 set -e -x
 pwd="$PWD"
-name=`sed -n -e '/^\([[:alnum:]-]\+\).*/ { s//\1/; p; q}' debian/changelog`
 version="$1"
 sourceroot=`mktemp -d -t "$name-source-XXXXXX"`
 export TAR_OPTIONS="--owner root --group root --mode a+rX"
