@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd' 
+[
+	<!ENTITY p 'nntp-pull'>
+	<!ENTITY version '1.3'>
+]>
+
+<refentry>
+
+<refentryinfo>
+	<title>&p; manual</title>
+	<productname>&p;</productname>
+	<copyright>
+		<year>2009</year>
+		<holder>Piotr Lewandowski</holder>
+		<holder>Jakub Wilk</holder>
+	</copyright>
+</refentryinfo>
+
+<refmeta>
+	<refentrytitle>&p;</refentrytitle>
+	<manvolnum>1</manvolnum>
+	<refmiscinfo class='version'>&version;</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+	<refname>&p;</refname>
+	<refpurpose>fetch articles from the server to the mbox</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+	<cmdsynopsis>
+		<command>&p;</command>
+		<arg choice='opt' rep='repeat'><replaceable>options</replaceable></arg>
+		<arg choice='plain'><replaceable>groupname</replaceable></arg>
+		<arg choice='opt' rep='repeat'><replaceable class='option'>groupname</replaceable></arg>
+	</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection>
+	<title>Description</title>
+	<para>
+		Fetch messages from the server and save them into the mailbox (mbox format).  Every argument is supposed
+		to be a name of group, optionally followed by a '>' character and mbox filename. If the mbox filename is
+		omitted, it defaults to the name of the group.
+	</para>
+	<para>
+		Besides global options (described in 
+		<citerefentry>
+			<refentrytitle>sinntp</refentrytitle>
+			<manvolnum>1</manvolnum>
+		</citerefentry>), <command>&p;</command> command takes following options:
+		<variablelist>
+			<varlistentry>
+				<term><option>--limit=<replaceable>N</replaceable></option></term>
+				<listitem>
+					<para>
+						Pull at most <replaceable>N</replaceable> messages.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><option>--reget</option></term>
+				<listitem>
+					<para>
+						Start from the first available message.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</para>
+</refsection>
+
+<refsection>
+	<title>Examples</title>
+	<para>
+		<command>&p; --server=news.example.org --limit=50 'comp.os.linux>os-linux'</command>
+		Fetches at most the 50 newest articles from the newsgroup comp.os.linux located on news.example.org
+		server and appends them to the os-linux mailbox file.
+	</para>
+	<para>
+		<command>&p; --server=news.example.net --reget --limit=3 comp.os.windows</command>
+		Fetches at most the 3 oldest articles from the newsgroup comp.os.windows located on news.example.net
+		server and appends them to the comp.os.windows mailbox file.
+	</para>
+</refsection>
+
+<refsection>
+	<title>See also</title>
+	<para>
+		<citerefentry>
+			<refentrytitle>sinntp</refentrytitle>
+			<manvolnum>1</manvolnum>
+		</citerefentry>
+	</para>
+</refsection>
+
+</refentry>
+
+<!-- vim:set ts=4 sw=4 tw=120: -->

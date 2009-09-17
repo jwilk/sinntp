@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd' 
+[
+	<!ENTITY p 'nntp-push'>
+	<!ENTITY version '1.3'>
+]>
+
+<refentry>
+
+<refentryinfo>
+	<title>&p; manual</title>
+	<productname>&p;</productname>
+	<copyright>
+		<year>2009</year>
+		<holder>Piotr Lewandowski</holder>
+		<holder>Jakub Wilk</holder>
+	</copyright>
+</refentryinfo>
+
+<refmeta>
+	<refentrytitle>&p;</refentrytitle>
+	<manvolnum>1</manvolnum>
+	<refmiscinfo class='version'>&version;</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+	<refname>&p;</refname>
+	<refpurpose>send an article to the server</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+	<cmdsynopsis>
+		<command>&p;</command>
+		<arg choice='opt' rep='repeat'><replaceable>options</replaceable></arg>
+		<arg choice='plain' rep='repeat'><replaceable>newsgroups</replaceable></arg>
+	</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection>
+	<title>Description</title>
+	<para>
+		Read a message in RFC 822 format from the standard input and send it to the server. Newsgroups can be specified
+in two manners:
+		<itemizedlist>
+			<listitem><para>as a command-line arguments,</para></listitem>
+			<listitem><para>in the Newsgroups header of the message.</para></listitem>
+		</itemizedlist>
+		The latter method takes precedence over command-line arguments. Read message can be altered by the specified
+plugins which are described along with global options in
+		<citerefentry>
+			<refentrytitle>sinntp</refentrytitle>
+			<manvolnum>1</manvolnum>
+		</citerefentry>.
+	</para>
+</refsection>
+
+<refsection>
+	<title>See also</title>
+	<para>
+		<citerefentry>
+			<refentrytitle>sinntp</refentrytitle>
+			<manvolnum>1</manvolnum>
+		</citerefentry>
+	</para>
+</refsection>
+
+</refentry>
+
+<!-- vim:set ts=4 sw=4 tw=120: -->

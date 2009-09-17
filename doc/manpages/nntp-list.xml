@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd' 
+[
+	<!ENTITY p 'nntp-list'>
+	<!ENTITY version '1.3'>
+]>
+
+<refentry>
+
+<refentryinfo>
+	<title>&p; manual</title>
+	<productname>&p;</productname>
+	<copyright>
+		<year>2009</year>
+		<holder>Piotr Lewandowski</holder>
+		<holder>Jakub Wilk</holder>
+	</copyright>
+</refentryinfo>
+
+<refmeta>
+	<refentrytitle>&p;</refentrytitle>
+	<manvolnum>1</manvolnum>
+	<refmiscinfo class='version'>&version;</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+	<refname>&p;</refname>
+	<refpurpose>print a list of available newsgroups</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+	<cmdsynopsis>
+		<command>&p;</command>
+		<arg choice='opt' rep='repeat'><replaceable>options</replaceable></arg>
+	</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection>
+	<title>Description</title>
+	<para>
+		Print a list of avaliable newsgroups to the standard output.
+	</para>
+	<para>
+		This commands takes neither command-specific options nor arguments.
+	</para>
+	<para>
+		Global options are described in 
+		<citerefentry>
+			<refentrytitle>sinntp</refentrytitle>
+			<manvolnum>1</manvolnum>
+		</citerefentry>.
+	</para>
+</refsection>
+
+<refsection>
+	<title>See also</title>
+	<para>
+		<citerefentry>
+			<refentrytitle>sinntp</refentrytitle>
+			<manvolnum>1</manvolnum>
+		</citerefentry>
+	</para>
+</refsection>
+
+</refentry>
+
+<!-- vim:set ts=4 sw=4 tw=120: -->
