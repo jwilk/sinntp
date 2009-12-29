@@ -38,7 +38,7 @@
 <refsection>
 	<title>Description</title>
 	<para>
-		Print a list of avaliable newsgroups to the standard output.
+		Print a list of available newsgroups to the standard output.
 	</para>
 	<para>
 		This commands takes neither command-specific options nor arguments.

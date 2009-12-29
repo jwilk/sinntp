@@ -61,7 +61,7 @@
 			<listitem><para>pull,</para></listitem>
 			<listitem><para>push.</para></listitem>
 		</itemizedlist>	
-		Above commands may also be invoked via convinience wrappers named in
+		Above commands may also be invoked via convenience wrappers named in
 		<command>nntp-<replaceable>command</replaceable></command> scheme (e.g. <command>nntp-get</command>). See
 		wrappers' manual pages for command synopsis and description.  </para>
 </refsection>
@@ -159,7 +159,7 @@
 		includes following plugins:
 		<itemizedlist> <!-- FIXME: lack of plugin arguments' description -->
 			<listitem><para><command>mimify</command> - add default charset to the message when it is not present,</para></listitem>
-			<listitem><para><command>strip_headers</command> - strip specifed headers from message.</para></listitem>
+			<listitem><para><command>strip_headers</command> - strip specified headers from message.</para></listitem>
 		</itemizedlist>
 	</para>
 </refsection>
@@ -171,7 +171,7 @@
 			<term>NNTPSERVER</term>
 			<listitem>
 				<para>
-					Address of the default NNTP server. It can be overriden by <option>--server</option> option.
+					Address of the default NNTP server. It can be overridden by <option>--server</option> option.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -195,7 +195,7 @@
 			<term>/etc/news/server</term>
 			<listitem>
 				<para>
-					A file with NNTP server address. Can be overriden by <varname>NNTPSERVER</varname> environment
+					A file with NNTP server address. Can be overridden by <varname>NNTPSERVER</varname> environment
 					variable or <option>--server</option> option.
 				</para>
 			</listitem>
