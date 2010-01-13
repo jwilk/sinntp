@@ -1,3 +1,14 @@
+sinntp (1.3.1) unstable; urgency=low
+
+  [ Piotr Lewandowski ]
+  * Add missing commas in sinntp manpage.
+
+  [ Jakub Wilk ]
+  * Fix typos in the manual pages.
+  * Include full copy of the GPL license.
+
+ -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Wed, 13 Jan 2010 09:34:36 +0100
+
 sinntp (1.3) unstable; urgency=low
 
   * Follow the XDG Base Directory Specification.

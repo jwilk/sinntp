@@ -15,7 +15,7 @@
 # GNU General Public License for more details.
 
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
-__version__ = '1.3'
+__version__ = '1.3.1'
 
 from nntplib import NNTP, NNTPTemporaryError, NNTPError
 from cStringIO import StringIO
