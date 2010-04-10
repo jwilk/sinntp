@@ -1,5 +1,6 @@
 #!/bin/sh
 name=sinntp
+url=https://sinntp.googlecode.com/hg/
 if [ $# -ne 1 ]
 then
   printf '%s <version>\n' "$0" >&2
@@ -12,10 +13,16 @@ sourceroot=`mktemp -d -t "$name-source-XXXXXX"`
 export TAR_OPTIONS="--owner root --group root --mode a+rX"
 export GZIP="-9 -n"
 mkdir -p "$sourceroot/$name-$version"
-hg archive -r "$version" "$sourceroot/$name-$version"
+if [ -d .hg ]
+then
+  hg archive -r "$version" "$sourceroot/$name-$version"
+else
+  hg clone -r "$version" "$url" "$sourceroot/$name-$version"
+fi
 cd "$sourceroot"
 rm -Rf */.hg*
-rm -Rf */tools/
 make -C */doc/manpages/
 tar -czf "$pwd/$name-$version.tar.gz" */
 rm -Rf "$sourceroot"
+
+# vim:ts=2 sw=2 et
