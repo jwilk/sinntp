@@ -336,15 +336,15 @@ if __name__ == '__main__':
         logging.info('Connecting to %r...', host)
         connection = NNTP(host, user = command.options.username, password = command.options.password)
     except socket.error, e:
-        logging.error('Could not connect to %r: %s', host, e.message)
+        logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
     except NNTPError, e:
-        logging.error('%r returned an error: %s', host, e.message)
+        logging.error('%r returned an error: %s', host, e)
         sys.exit(4)
     try:
         command(connection)
     except NNTPError, e:
-        logging.error('NNTP error: ' + e.message)
+        logging.error('NNTP error: %s', e)
         sys.exit(4)
     finally:
         connection.quit()
