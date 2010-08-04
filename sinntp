@@ -154,7 +154,7 @@ class Pull(Command):
         while i <= last:
             try:
                 connection.stat(str(i))
-            except NNTPTemporaryError, e:
+            except NNTPTemporaryError:
                 i += 1
             else:
                 break
