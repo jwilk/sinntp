@@ -294,12 +294,6 @@ class BaseCommand(Command):
             self.oparser.error('Unknown command: %r.' % self.command_name)
         sys.argv[0] = 'nntp-%s' % self.command_name
 
-def show_usage():
-    sys.stderr.write('Usage: \n')
-    for command in COMMANDS.itervalues():
-        sys.stderr.write('    %s\n' % command.__doc__.strip())
-    sys.exit(1)
-
 def setup_logging(syslog, verbose):
     logger = logging.getLogger()
     format = '%(message)s'
