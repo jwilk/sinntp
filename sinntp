@@ -93,7 +93,7 @@ class Config(object):
 class Command(object):
 
     def get_option_parser(self):
-        o = argparse.ArgumentParser(usage = self.__doc__.rstrip())
+        o = argparse.ArgumentParser(usage=self.__doc__.rstrip())
         o.add_argument('--version', action='version', version='%(prog)s ' + __version__,  help='show program\'s version number and exit')
         o.add_argument('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
         o.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
@@ -201,7 +201,7 @@ class Pull(Command):
                     message = '\n'.join(message)
                     message = email.message_from_string(message)
                     for plugin in self.plugins:
-                        message = plugin(message = message)
+                        message = plugin(message=message)
                         if message is None:
                             break
                     if message is not None:
@@ -228,7 +228,7 @@ class Push(Command):
         if not 'Newsgroups' in message and self.args:
             message['Newsgroups'] = ','.join(self.args)
         for plugin in self.plugins:
-            message = plugin(message = message)
+            message = plugin(message=message)
         buffer = StringIO()
         generator = email.generator.Generator(buffer, mangle_from_=False)
         generator.flatten(message)
@@ -328,7 +328,7 @@ if __name__ == '__main__':
     socket.setdefaulttimeout(command.options.timeout)
     try:
         logging.info('Connecting to %r...', host)
-        connection = NNTP(host, user = command.options.username, password = command.options.password)
+        connection = NNTP(host, user=command.options.username, password=command.options.password)
     except socket.error, e:
         logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
