@@ -332,7 +332,7 @@ if __name__ == '__main__':
     socket.setdefaulttimeout(command.options.timeout)
     try:
         logging.info('Connecting to %r...', host)
-        connection = NNTP(host, user=command.options.username, password=command.options.password)
+        connection = NNTP(host, user=command.options.username, password=command.options.password, readermode=True)
     except socket.error, e:
         logging.error('Could not connect to %r: %s', host, e[1])
         sys.exit(3)
