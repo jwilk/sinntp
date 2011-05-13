@@ -17,7 +17,7 @@
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '1.4'
 
-from nntplib import NNTP, NNTPTemporaryError, NNTPError
+from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
 from cStringIO import StringIO
 import argparse
 import email
@@ -29,6 +29,7 @@ import logging.handlers
 import mailbox
 import os
 import os.path
+import re
 import socket
 import sys
 
@@ -103,7 +104,7 @@ class Command(object):
         o.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
         o.add_argument('-q', '--quiet', dest='verbose', action='store_false', help='be less verbose')
         o.add_argument('-p', '--plugin', dest='plugins', action='append', metavar='PLUGIN', help='use plugin')
-        o.add_argument('-S', '--server', dest='server', action='store', help='specify server address')
+        o.add_argument('-S', '--server', metavar='HOST[:PORT]', dest='server', action='store', help='specify server address')
         o.add_argument('-U', '--username', dest='username', action='store', help='specify username')
         o.add_argument('-P', '--password', dest='password', action='store', help='specify password')
         o.add_argument('-t', '--timeout', dest='timeout', action='store', type=int, help='specify connection timeout')
@@ -329,15 +330,20 @@ if __name__ == '__main__':
     if not host:
         sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
+    if re.match('.*:[0-9]+$', host):
+        host, port = host.rsplit(':')
+        port = int(port)
+    else:
+        port = NNTP_PORT
     socket.setdefaulttimeout(command.options.timeout)
     try:
-        logging.info('Connecting to %r...', host)
+        logging.info('Connecting to %s:%d...', host, port)
         connection = NNTP(host, user=command.options.username, password=command.options.password, readermode=True)
     except socket.error, e:
-        logging.error('Could not connect to %r: %s', host, e[1])
+        logging.error('Could not connect to %s:%d: %s', host, port, e[1])
         sys.exit(3)
     except NNTPError, e:
-        logging.error('%r returned an error: %s', host, e)
+        logging.error('%s:%d returned an error: %s', host, port, e)
         sys.exit(4)
     try:
         command(connection)
@@ -346,6 +352,6 @@ if __name__ == '__main__':
         sys.exit(4)
     finally:
         connection.quit()
-        logging.info('Connection to %r closed.', host)
+        logging.info('Connection to %s:%d closed.', host, port)
 
 # vim:ts=4 sw=4 et

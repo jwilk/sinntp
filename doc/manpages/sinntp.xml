@@ -112,12 +112,14 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-S, --server=<replaceable>server</replaceable></option></term>
+				<term><option>-S, --server=<replaceable>host</replaceable></option></term>
+				<term><option>-S, --server=<replaceable>host</replaceable>:<replaceable>port</replaceable></option></term>
 				<listitem>
 					<para>
-						Use specified <replaceable>server</replaceable>. If omitted <command>sinntp</command> will use
-						address stored in <filename>/etc/nntp/server</filename> file or in <varname>NNTPSERVER</varname>
-						variable (the latter takes precedence over the former).
+						Connect to the specified <replaceable>host</replaceable> and <replaceable>port</replaceable>. If
+						omitted <command>sinntp</command> will use address stored in
+						<filename>/etc/nntp/server</filename> file or in <varname>NNTPSERVER</varname> variable (the
+						latter takes precedence over the former).
 					</para>
 				</listitem>
 			</varlistentry>
