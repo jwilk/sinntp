@@ -39,6 +39,7 @@ except ImportError:
     import tinyxdg as xdg
 
 import plugins
+import utils
 
 def monkey_patch_mailbox_module():
     '''
@@ -330,11 +331,7 @@ if __name__ == '__main__':
     if not host:
         sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
-    if re.match('.*:[0-9]+$', host):
-        host, port = host.rsplit(':')
-        port = int(port)
-    else:
-        port = NNTP_PORT
+    host, port = utils.split_host(host, NNTP_PORT)
     socket.setdefaulttimeout(command.options.timeout)
     try:
         logging.info('Connecting to %s:%d...', host, port)
