@@ -12,6 +12,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
+import os
 import re
 
 _split_host_re = re.compile(
@@ -29,5 +30,23 @@ def split_host(host, default_port=None):
     else:
         port = int(port)
     return host, port
+
+class xdg(object):
+
+    '''
+    Tiny replacement for xdg.BaseDirectory.
+    '''
+
+    xdg_data_home = os.environ.get('XDG_DATA_HOME') or os.path.join(os.path.expanduser('~'), '.local', 'share')
+
+    @classmethod
+    def save_data_path(xdg, resource):
+        path = os.path.join(xdg.xdg_data_home, resource)
+        try:
+            os.makedirs(path, 0700)
+        except OSError:
+            if not os.path.isdir(path):
+                raise
+        return path
 
 # vim:ts=4 sw=4 et

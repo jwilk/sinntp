@@ -36,7 +36,7 @@ import sys
 try:
     import xdg.BaseDirectory as xdg
 except ImportError:
-    import tinyxdg as xdg
+    from utils import xdg
 
 import plugins
 import utils
