@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # encoding=UTF-8
 
-# Copyright © 2011
+# Copyright © 2011, 2012
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
 # This program is free software; you can redistribute it and/or modify it
@@ -17,6 +17,8 @@ try:
     import unittest2 as unittest
 except ImportError:
     import unittest
+
+import os
 
 import utils
 
@@ -63,6 +65,38 @@ class test_split_host(unittest.TestCase):
             utils.split_host('[2001:4de0:1::1:1]:42', 119),
             ('2001:4de0:1::1:1', 42)
         )
+
+class test_xdg(unittest.TestCase):
+
+    def setUp(self):
+        self._default_xdg_data_home = \
+            os.path.join(os.path.expanduser('~'), '.local', 'share')
+
+    def _check_xdg_data_home(self, expected_path=None):
+        if expected_path is None:
+            expected_path = self._default_xdg_data_home
+        reload(utils)
+        self.assertEqual(
+            utils.xdg.xdg_data_home,
+            expected_path,
+        )
+
+    def test_XDG_DATA_HOME_unset(self):
+        os.environ['XDG_DATA_HOME'] = ''
+        del os.environ['XDG_DATA_HOME']
+        self._check_xdg_data_home()
+
+    def test_XDG_DATA_HOME_empty(self):
+        os.environ['XDG_DATA_HOME'] = ''
+        self._check_xdg_data_home()
+
+    def test_XDG_DATA_HOME_relative(self):
+        os.environ['XDG_DATA_HOME'] = 'eggs'
+        self._check_xdg_data_home()
+
+    def test_XDG_DATA_HOME_absolute(self):
+        os.environ['XDG_DATA_HOME'] = '/eggs'
+        self._check_xdg_data_home('/eggs')
 
 if __name__ == '__main__':
     unittest.main()

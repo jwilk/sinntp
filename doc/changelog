@@ -1,8 +1,9 @@
 sinntp (1.4.1) UNRELEASED; urgency=low
 
-  * 
+  * Ignore relative paths in XDG_* variables (in our own minimal XDG Base
+    Directory implementation).
 
- -- Jakub Wilk <jwilk@jwilk.net>  Wed, 15 Feb 2012 18:52:46 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Wed, 15 Feb 2012 19:07:19 +0100
 
 sinntp (1.4) unstable; urgency=low
 

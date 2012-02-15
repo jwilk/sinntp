@@ -1,6 +1,6 @@
 # encoding=UTF-8
 
-# Copyright © 2011
+# Copyright © 2011, 2012
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
 # This program is free software; you can redistribute it and/or modify it
@@ -37,7 +37,18 @@ class xdg(object):
     Tiny replacement for xdg.BaseDirectory.
     '''
 
-    xdg_data_home = os.environ.get('XDG_DATA_HOME') or os.path.join(os.path.expanduser('~'), '.local', 'share')
+    xdg_data_home = os.environ.get('XDG_DATA_HOME') or ''
+    if not xdg_data_home.startswith('/'):
+        # “All paths […] must be absolute. If an implementation encounters a
+        # relative path […] it should consider the path invalid and ignore it.
+        #
+        # […]
+        #
+        # If $XDG_DATA_HOME is either not set or empty, a default equal to
+        # $HOME/.local/share should be used.”
+        #
+        # (XDG Base Directory Specification 0.8)
+        xdg_data_home = os.path.join(os.path.expanduser('~'), '.local', 'share')
 
     @classmethod
     def save_data_path(xdg, resource):
