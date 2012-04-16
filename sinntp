@@ -111,6 +111,7 @@ class Command(object):
         o.add_argument('-S', '--server', metavar='HOST[:PORT]', dest='server', action='store', help='specify server address')
         o.add_argument('-U', '--username', dest='username', action='store', help='specify username')
         o.add_argument('-P', '--password', dest='password', action='store', help='specify password')
+        o.add_argument('--no-netrc', dest='netrc', action='store_false', help='ignore credentials in ~/.netrc')
         o.add_argument('-t', '--timeout', dest='timeout', action='store', type=int, help='specify connection timeout')
         return o
 
@@ -338,7 +339,7 @@ if __name__ == '__main__':
     socket.setdefaulttimeout(command.options.timeout)
     try:
         logging.info('Connecting to %s:%d...', host, port)
-        connection = NNTP(host, port=port, user=command.options.username, password=command.options.password, readermode=True)
+        connection = NNTP(host, port=port, user=command.options.username, password=command.options.password, readermode=True, usenetrc=command.options.netrc)
     except socket.error, e:
         logging.error('Could not connect to %s:%d: %s', host, port, e[1])
         sys.exit(3)
