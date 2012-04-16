@@ -38,7 +38,7 @@ class xdg(object):
     '''
 
     xdg_data_home = os.environ.get('XDG_DATA_HOME') or ''
-    if not xdg_data_home.startswith('/'):
+    if not os.path.isabs(xdg_data_home):
         # “All paths […] must be absolute. If an implementation encounters a
         # relative path […] it should consider the path invalid and ignore it.
         #
