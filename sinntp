@@ -33,8 +33,6 @@ import re
 import socket
 import sys
 
-from utils import xdg
-
 import plugins
 import utils
 
@@ -69,7 +67,7 @@ class Config(object):
         if os.path.exists(self._root):
             logging.warn('$HOME/.sinntp/ is deprecated in favor of $XDG_DATA_HOME. See the NEWS file for details.')
             return
-        self._root = xdg.save_data_path('sinntp')
+        self._root = utils.xdg.save_data_path('sinntp')
 
     def _get_file_name(self, name):
         base_name = '%s@%s' % (name, self._hostname)
