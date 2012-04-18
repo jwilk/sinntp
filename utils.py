@@ -32,9 +32,8 @@ def split_host(host, default_port=None):
     return host, port
 
 class xdg(object):
-
     '''
-    Tiny replacement for xdg.BaseDirectory.
+    tiny replacement for PyXDG's xdg.BaseDirectory
     '''
 
     xdg_data_home = os.environ.get('XDG_DATA_HOME') or ''
