@@ -9,6 +9,7 @@ all: $(MAN_FILES)
 
 %.1: %.xml
 	$(XSLTPROC) $(XSL) $(<)
+	sed -i -e  '/^[.]TH/ { s/"[0-9/]\{10\}"/"$(shell date +%F)"/ }' $(@)
 
 .PHONY: clean
 clean:
