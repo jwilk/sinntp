@@ -14,6 +14,7 @@
 		<year>2009</year>
 		<year>2010</year>
 		<year>2011</year>
+		<year>2012</year>
 		<holder>Piotr Lewandowski</holder>
 		<holder>Jakub Wilk</holder>
 	</copyright>
@@ -42,13 +43,13 @@
 	<title>Description</title>
 	<para>
 		Read a message in RFC 822 format from the standard input and send it to the server. Newsgroups can be specified
-in two manners:
+		in two manners:
 		<itemizedlist>
 			<listitem><para>as a command-line arguments,</para></listitem>
 			<listitem><para>in the Newsgroups header of the message.</para></listitem>
 		</itemizedlist>
 		The latter method takes precedence over command-line arguments. Read message can be altered by the specified
-plugins which are described along with global options in
+		plugins which are described along with global options in
 		<citerefentry>
 			<refentrytitle>sinntp</refentrytitle>
 			<manvolnum>1</manvolnum>
