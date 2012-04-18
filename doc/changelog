@@ -1,4 +1,4 @@
-sinntp (1.5) UNRELEASED; urgency=low
+sinntp (1.5) unstable; urgency=low
 
   * Always use our own implementation of XDG Base Directory instead of PyXDG.
   * Ignore relative paths in XDG_* variables.
@@ -6,7 +6,7 @@ sinntp (1.5) UNRELEASED; urgency=low
     Griesbach for the bug report and the inital patch.
     http://bugs.debian.org/668927
 
- -- Jakub Wilk <jwilk@jwilk.net>  Wed, 18 Apr 2012 20:25:00 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Wed, 18 Apr 2012 20:52:07 +0200
 
 sinntp (1.4) unstable; urgency=low
 
