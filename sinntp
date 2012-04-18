@@ -33,10 +33,7 @@ import re
 import socket
 import sys
 
-try:
-    import xdg.BaseDirectory as xdg
-except ImportError:
-    from utils import xdg
+from utils import xdg
 
 import plugins
 import utils

@@ -1,12 +1,12 @@
 sinntp (1.4.1) UNRELEASED; urgency=low
 
-  * Ignore relative paths in XDG_* variables (in our own minimal XDG Base
-    Directory implementation).
+  * Always use our own implementation of XDG Base Directory instead of PyXDG.
+  * Ignore relative paths in XDG_* variables.
   * Add --no-netrc option that ignores ~/.netrc credentials. Thanks to Dirk
     Griesbach for the bug report and the inital patch.
     http://bugs.debian.org/668927
 
- -- Jakub Wilk <jwilk@jwilk.net>  Mon, 16 Apr 2012 15:41:45 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Wed, 18 Apr 2012 16:59:09 +0200
 
 sinntp (1.4) unstable; urgency=low
 
