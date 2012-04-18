@@ -14,6 +14,7 @@
 		<year>2009</year>
 		<year>2010</year>
 		<year>2011</year>
+		<year>2012</year>
 		<holder>Piotr Lewandowski</holder>
 		<holder>Jakub Wilk</holder>
 	</copyright>
@@ -80,7 +81,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-h, --help</option></term>
+				<term><option>-h</option></term>
+				<term><option>--help</option></term>
 				<listitem>
 					<para>
 						Show short help message end exit.
@@ -88,7 +90,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-v, --verbose</option></term>
+				<term><option>-v</option></term>
+				<term><option>--verbose</option></term>
 				<listitem>
 					<para>
 						Be more verbose (use multiple times to increase verbosity).
@@ -96,7 +99,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-q, --quiet</option></term>
+				<term><option>-q</option></term>
+				<term><option>--quiet</option></term>
 				<listitem>
 					<para>
 						Be less verbose (use multiple times to decrease verbosity).
@@ -104,7 +108,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-p, --plugin=<replaceable>plugin</replaceable></option></term>
+				<term><option>-p</option></term>
+				<term><option>--plugin=<replaceable>plugin</replaceable></option></term>
 				<listitem>
 					<para>
 						Load and use <replaceable>plugin</replaceable>.
@@ -112,8 +117,9 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-S, --server=<replaceable>host</replaceable></option></term>
-				<term><option>-S, --server=<replaceable>host</replaceable>:<replaceable>port</replaceable></option></term>
+				<term><option>-S</option></term>
+				<term><option>--server=<replaceable>host</replaceable></option></term>
+				<term><option>--server=<replaceable>host</replaceable>:<replaceable>port</replaceable></option></term>
 				<listitem>
 					<para>
 						Connect to the specified <replaceable>host</replaceable> and <replaceable>port</replaceable>. If
@@ -124,7 +130,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-U, --username=<replaceable>username</replaceable></option></term>
+				<term><option>-U</option></term>
+				<term><option>--username=<replaceable>username</replaceable></option></term>
 				<listitem>
 					<para>
 						Use specified <replaceable>username</replaceable> for authentication.
@@ -132,7 +139,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-P, --password=<replaceable>password</replaceable></option></term>
+				<term><option>-P</option></term>
+				<term><option>--password=<replaceable>password</replaceable></option></term>
 				<listitem>
 					<para>
 						Use specified <replaceable>password</replaceable> for authentication.
@@ -143,7 +151,8 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><option>-t, --timeout=<replaceable>timeout</replaceable></option></term>
+				<term><option>-t</option></term>
+				<term><option>--timeout=<replaceable>timeout</replaceable></option></term>
 				<listitem>
 					<para>
 						Wait maximum <replaceable>timeout</replaceable> seconds during communication with the server.
@@ -196,7 +205,7 @@
 	<title>Files</title>
 	<variablelist>
 		<varlistentry>
-			<term>/etc/news/server</term>
+			<term><filename>/etc/news/server</filename></term>
 			<listitem>
 				<para>
 					A file with NNTP server address. Can be overridden by <varname>NNTPSERVER</varname> environment
@@ -205,7 +214,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$XDG_DATA_HOME/sinntp/</term>
+			<term><filename><varname>$XDG_DATA_HOME</varname>/sinntp/</filename></term>
 			<listitem>
 				<para>
 					Location of sinntp data files.
