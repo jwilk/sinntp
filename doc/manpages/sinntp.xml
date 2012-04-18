@@ -151,6 +151,15 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
+				<term><option>--no-netrc</option></term>
+				<listitem>
+					<para>
+						Do not attempt to read authentication credentials (username, password) from the
+						<filename>~/.netrc</filename> file.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
 				<term><option>-t</option></term>
 				<term><option>--timeout=<replaceable>timeout</replaceable></option></term>
 				<listitem>
