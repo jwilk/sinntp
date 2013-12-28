@@ -1,3 +1,9 @@
+sinntp (1.5.1) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Jakub Wilk <jwilk@jwilk.net>  Sat, 28 Dec 2013 17:40:46 +0100
+
 sinntp (1.5) unstable; urgency=low
 
   * Always use our own implementation of XDG Base Directory instead of PyXDG.
