@@ -2,8 +2,10 @@ sinntp (1.5.1) UNRELEASED; urgency=medium
 
   * Lift the line length limit to 1 megabyte.
     https://code.google.com/p/sinntp/issues/detail?id=9
+  * If an exception occurred, don't bother sending the QUIT command to the
+    server, to avoid provoking further exceptions with misleading tracebacks.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Fri, 25 Apr 2014 12:59:37 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Fri, 25 Apr 2014 13:15:41 +0200
 
 sinntp (1.5) unstable; urgency=low
 
