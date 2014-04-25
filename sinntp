@@ -62,7 +62,7 @@ del monkey_patch_mailbox_module
 #
 # References:
 # * https://code.google.com/p/sinntp/issues/detail?id=9
-# * https://bugs.python.org/issue16040
+# * http://bugs.python.org/issue16040
 nntplib._MAXLINE = 1 << 20
 
 class Config(object):
