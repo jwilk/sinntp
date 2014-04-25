@@ -1,8 +1,9 @@
 sinntp (1.5.1) UNRELEASED; urgency=medium
 
-  * 
+  * Lift the line length limit to 1 megabyte.
+    https://code.google.com/p/sinntp/issues/detail?id=9
 
- -- Jakub Wilk <jwilk@jwilk.net>  Sat, 28 Dec 2013 17:40:46 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Fri, 25 Apr 2014 12:59:37 +0200
 
 sinntp (1.5) unstable; urgency=low
 

@@ -27,6 +27,7 @@ import functools
 import logging
 import logging.handlers
 import mailbox
+import nntplib
 import os
 import os.path
 import re
@@ -53,6 +54,16 @@ def monkey_patch_mailbox_module():
     mailbox._create_carefully = create_carefully_666
 monkey_patch_mailbox_module()
 del monkey_patch_mailbox_module
+
+# nntplib limits line length to 2048 bytes to prevent denial of service
+# (CVE-2013-1752). But the line length limit doesn't buy us much, because
+# sinntp loads the whole message into memory anyway. So let's lift the limit to
+# 1 megabyte.
+#
+# References:
+# * https://code.google.com/p/sinntp/issues/detail?id=9
+# * https://bugs.python.org/issue16040
+nntplib._MAXLINE = 1 << 20
 
 class Config(object):
 
