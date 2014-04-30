@@ -98,11 +98,14 @@ class Config(object):
             file.close()
 
     def __setitem__(self, name, value):
-        file = open(self._get_file_name(name), 'wb')
+        path = self._get_file_name(name)
+        file = open(path + '_tmp', 'wb')
         try:
             file.write(str(value))
+            os.fsync(file.fileno())
         finally:
             file.close()
+        os.rename(path + '_tmp', path)
 
 class Command(object):
 
