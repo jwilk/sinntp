@@ -30,6 +30,7 @@ import mailbox
 import nntplib
 import os
 import os.path
+import signal
 import socket
 import sys
 
@@ -333,10 +334,19 @@ def setup_logging(syslog, verbose):
     }.get(verbose)
     logger.setLevel(level)
 
+class TerminatedBySignal(Exception):
+    pass
+
+def setup_signal_handler(signame):
+    def handler(signo, frame):
+        raise TerminatedBySignal(signame)
+    signal.signal(getattr(signal, signame), handler)
+
 if __name__ == '__main__':
     argv = sys.argv[1:]
     base_command = BaseCommand(argv)
     command = base_command.command_class(argv)
+    setup_signal_handler('SIGTERM')
     setup_logging(command.options.syslog, command.options.verbose)
     host = command.options.server or os.getenv('NNTPSERVER') or \
         (os.path.exists('/etc/news/server') and file('/etc/news/server').readline().strip())
