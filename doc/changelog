@@ -1,10 +1,10 @@
-sinntp (1.5.2) UNRELEASED; urgency=low
+sinntp (1.5.2) unstable; urgency=low
 
   * Update the state file atomically.
   * Exit gracefully, updating the state file, when killed with SIGTERM.
     https://code.google.com/p/sinntp/issues/detail?id=15
 
- -- Jakub Wilk <jwilk@jwilk.net>  Wed, 30 Apr 2014 13:00:40 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Thu, 10 Jul 2014 12:14:38 +0200
 
 sinntp (1.5.1) unstable; urgency=medium
 
