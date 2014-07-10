@@ -4,3 +4,4 @@ set -e
 set -x
 dch -m -v "$version" -c doc/changelog
 sed -i -r -e "s/<(!ENTITY version) '[0-9.]+'>/<\1 '$version'>/" doc/manpages/*.xml
+sed -i -r -e "s/(__version__) = '[0-9.]+'/\1 = '$version'/" sinntp
