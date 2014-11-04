@@ -40,7 +40,7 @@ import utils
 def monkey_patch_mailbox_module():
     '''
     Work-around a bug in the `mailbox` module.
-    See http://bugs.python.org/issue3228 for details.
+    See https://bugs.python.org/issue3228 for details.
     '''
     try:
         create_carefully = mailbox._create_carefully
@@ -62,7 +62,7 @@ del monkey_patch_mailbox_module
 #
 # References:
 # * https://code.google.com/p/sinntp/issues/detail?id=9
-# * http://bugs.python.org/issue16040
+# * https://bugs.python.org/issue16040
 nntplib._MAXLINE = 1 << 20
 
 class Config(object):
