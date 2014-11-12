@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd' 
+<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd'
 [
 	<!ENTITY p 'nntp-get'>
 	<!ENTITY version '1.5.3'>
@@ -42,14 +42,14 @@
 <refsection>
 	<title>Description</title>
 	<para>
-		Print a single article to the standard output. The requested article is specified by the value of Message-Id header. 
+		Print a single article to the standard output. The requested article is specified by the value of Message-Id header.
 	</para>
 	<para>
 		A single <replaceable>message-id</replaceable> argument is a value of the requested article's Message-Id header.
 		It can be provided with or without angle brackets.
 	</para>
 	<para>
-		Global options are described in 
+		Global options are described in
 		<citerefentry>
 			<refentrytitle>sinntp</refentrytitle>
 			<manvolnum>1</manvolnum>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd' 
+<!DOCTYPE refentry PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.docbook.org/xml/4.5/docbookx.dtd'
 [
 	<!ENTITY p 'sinntp'>
 	<!ENTITY version '1.5.3'>
@@ -63,7 +63,7 @@
 			<listitem><para>list,</para></listitem>
 			<listitem><para>pull,</para></listitem>
 			<listitem><para>push.</para></listitem>
-		</itemizedlist>	
+		</itemizedlist>
 		Above commands may also be invoked via convenience wrappers named in
 		<command>nntp-<replaceable>command</replaceable></command> scheme (e.g. <command>nntp-get</command>). See
 		wrappers' manual pages for command synopsis and description.  </para>

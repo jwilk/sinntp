@@ -3,7 +3,7 @@ Integrating sinntp with mutt
 ============================
 
 Since sinntp stores newsgroups in mboxes, adding them to mutt is simple, see
-description of ``mailboxes`` command in Mutt documentation for details. 
+description of ``mailboxes`` command in Mutt documentation for details.
 
 Posting to newsgroups requires adding folder hooks:
 
@@ -11,7 +11,7 @@ Posting to newsgroups requires adding folder hooks:
 
     folder-hook . unmy_hdr To
     folder-hook . unset sendmail
-    
+
     `for group in ${SINNTP_HOME:-$HOME/.sinntp}/*; do \
         group="$(basename $group | cut -d@ -f1)"; \
         echo -n folder-hook \"^${group}$\" \" \
