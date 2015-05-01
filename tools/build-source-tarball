@@ -1,6 +1,6 @@
 #!/bin/sh
 name=sinntp
-url=https://sinntp.googlecode.com/hg/
+url=https://bitbucket.org/jwilk/sinntp
 if [ $# -ne 1 ]
 then
   printf '%s <version>\n' "$0" >&2
