@@ -8,14 +8,14 @@ sinntp (1.5.2) unstable; urgency=low
 
   * Update the state file atomically.
   * Exit gracefully, updating the state file, when killed with SIGTERM.
-    https://code.google.com/p/sinntp/issues/detail?id=15
+    https://bitbucket.org/jwilk/sinntp/issue/15
 
  -- Jakub Wilk <jwilk@jwilk.net>  Thu, 10 Jul 2014 12:14:38 +0200
 
 sinntp (1.5.1) unstable; urgency=low
 
   * Lift the line length limit to 1 megabyte.
-    https://code.google.com/p/sinntp/issues/detail?id=9
+    https://bitbucket.org/jwilk/sinntp/issue/9
   * If an exception occurred, don't bother sending the QUIT command to the
     server, to avoid provoking further exceptions with misleading tracebacks.
 
@@ -37,7 +37,7 @@ sinntp (1.4) unstable; urgency=low
   * Send a ‘mode reader’ command before authentication. Thanks to Pierre
     Habouzit for the bug report.
   * Allow to specify port number for the -S/--server option.
-    https://code.google.com/p/sinntp/issues/detail?id=7
+    https://bitbucket.org/jwilk/sinntp/issue/7
   * Fall back to our own minimal XDG Base Directory implementation if PyXDG is
     not found.
   * Add some tests.
@@ -66,7 +66,7 @@ sinntp (1.3) unstable; urgency=low
 
   * Follow the XDG Base Directory Specification.
   * Add manual pages.
-    https://code.google.com/p/sinntp/issues/detail?id=1
+    https://bitbucket.org/jwilk/sinntp/issue/1
 
  -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Thu, 17 Sep 2009 19:01:09 +0200
 
@@ -81,7 +81,7 @@ sinntp (1.1.1) unstable; urgency=low
 
   [ Piotr Lewandowski ]
   * Fix command line arguments parsing.
-    https://code.google.com/p/sinntp/issues/detail?id=6
+    https://bitbucket.org/jwilk/sinntp/issue/6
 
   [ Jakub Wilk ]
   * Don't use symlinks.
@@ -92,7 +92,7 @@ sinntp (1.1) unstable; urgency=low
 
   * Add the --quiet option.
   * Add the --timeout option.
-    https://code.google.com/p/sinntp/issues/detail?id=5
+    https://bitbucket.org/jwilk/sinntp/issue/5
   * Handle socket exceptions gracefully.
   * Handle connection NNTP errors gracefully.
   * Allow to provide newsgroup names as arguments for nntp-push.

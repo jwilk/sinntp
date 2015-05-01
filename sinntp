@@ -61,7 +61,7 @@ del monkey_patch_mailbox_module
 # 1 megabyte.
 #
 # References:
-# * https://code.google.com/p/sinntp/issues/detail?id=9
+# * https://bitbucket.org/jwilk/sinntp/issue/9
 # * https://bugs.python.org/issue16040
 nntplib._MAXLINE = 1 << 20
 
