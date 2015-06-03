@@ -1,8 +1,8 @@
 sinntp (1.5.3) UNRELEASED; urgency=low
 
-  * 
+  * Drop support for Python 2.5.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Thu, 10 Jul 2014 12:16:30 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Wed, 03 Jun 2015 18:18:25 +0200
 
 sinntp (1.5.2) unstable; urgency=low
 
