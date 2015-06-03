@@ -89,7 +89,7 @@ class Config(object):
     def __getitem__(self, name):
         try:
             file = open(self._get_file_name(name), 'rb')
-        except IOError, ex:
+        except IOError as ex:
             if ex.errno == errno.ENOENT:
                 return 0
             raise
@@ -187,7 +187,7 @@ class Pull(Command):
             yield int(no), body
             try:
                 _, no, _ = connection.next()
-            except NNTPTemporaryError, ex:
+            except NNTPTemporaryError as ex:
                 if ex.response.startswith('421'):
                     break
                 raise
@@ -364,15 +364,15 @@ if __name__ == '__main__':
             readermode=True,
             usenetrc=command.options.netrc
         )
-    except socket.error, e:
+    except socket.error as e:
         logging.error('Could not connect to %s:%d: %s', host, port, e[1])
         sys.exit(3)
-    except NNTPError, e:
+    except NNTPError as e:
         logging.error('%s:%d returned an error: %s', host, port, e)
         sys.exit(4)
     try:
         command(connection)
-    except NNTPError, e:
+    except NNTPError as e:
         logging.error('NNTP error: %s', e)
         sys.exit(4)
     connection.quit()
