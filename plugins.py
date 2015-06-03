@@ -1,6 +1,6 @@
 # encoding=UTF-8
 
-# Copyright © 2008, 2009, 2010, 2011
+# Copyright © 2008-2015
 #   Piotr Lewandowski <piotr.lewandowski@gmail.com>,
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
