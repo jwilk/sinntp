@@ -53,7 +53,7 @@ class xdg(object):
     def save_data_path(xdg, resource):
         path = os.path.join(xdg.xdg_data_home, resource)
         try:
-            os.makedirs(path, 0700)
+            os.makedirs(path, 0o700)
         except OSError:
             if not os.path.isdir(path):
                 raise

@@ -48,7 +48,7 @@ def monkey_patch_mailbox_module():
         return
     def create_carefully_666(*args, **kwargs):
         file = create_carefully(*args, **kwargs)
-        mode = os.stat(file.name).st_mode & 0666
+        mode = os.stat(file.name).st_mode & 0o666
         os.chmod(file.name, mode)
         return file
     mailbox._create_carefully = create_carefully_666
