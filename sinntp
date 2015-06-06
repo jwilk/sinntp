@@ -41,7 +41,7 @@ import utils
 
 def monkey_patch_mailbox_module():
     '''
-    Work-around a bug in the `mailbox` module.
+    Work around a bug in the `mailbox` module.
     See https://bugs.python.org/issue3228 for details.
     '''
     try:
