@@ -20,12 +20,12 @@ __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '1.5.3'
 
 from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
-from cStringIO import StringIO
 import argparse
 import email
 import email.generator
 import errno
 import functools
+import io
 import logging
 import logging.handlers
 import mailbox
@@ -250,7 +250,7 @@ class Push(Command):
             message['Newsgroups'] = ','.join(self.args)
         for plugin in self.plugins:
             message = plugin(message=message)
-        buffer = StringIO()
+        buffer = io.BytesIO()
         generator = email.generator.Generator(buffer, mangle_from_=False)
         generator.flatten(message)
         buffer.seek(0)
