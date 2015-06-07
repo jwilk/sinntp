@@ -36,7 +36,7 @@ sinntp (1.4) unstable; urgency=low
   * Use the argparse (rather than optparse) module to parse options.
   * Send a ‘mode reader’ command before authentication. Thanks to Pierre
     Habouzit for the bug report.
-  * Allow to specify port number for the -S/--server option.
+  * Allow specifying port number for the -S/--server option.
     https://bitbucket.org/jwilk/sinntp/issue/7
   * Fall back to our own minimal XDG Base Directory implementation if PyXDG is
     not found.
