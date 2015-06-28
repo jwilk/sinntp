@@ -380,4 +380,4 @@ if __name__ == '__main__':
     connection.quit()
     logging.info('Connection to %s:%d closed.', host, port)
 
-# vim:ts=4 sw=4 et
+# vim:ts=4 sts=4 sw=4 et

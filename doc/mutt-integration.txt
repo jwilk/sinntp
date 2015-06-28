@@ -26,4 +26,4 @@ which matches all folder names. You may want to set a default value there.
 ``autoedit`` variable is also worth noticing when posting to newsgroups since
 ``To:`` header is added automatically in above configuration.
 
-.. vim:ft=rst ts=4 sw=4
+.. vim:ft=rst ts=4 sts=4 sw=4 et
