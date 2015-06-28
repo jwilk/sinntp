@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # encoding=UTF-8
 
-# Copyright © 2011, 2012
+# Copyright © 2011-2012
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
 # This program is free software; you can redistribute it and/or modify it
