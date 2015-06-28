@@ -3,7 +3,10 @@ python:
 - "2.6"
 - "2.7"
 - "pypy"
+install:
+- pip install docutils
 script:
 - nosetests --verbose
+- grep -r -l ft=rst doc/ | xargs -t -n1 -I{} rst2pseudoxml.py --strict {} /dev/null
 
 # vim:ts=2 sts=2 sw=2 et
