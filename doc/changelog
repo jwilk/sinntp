@@ -95,7 +95,7 @@ sinntp (1.1) unstable; urgency=low
     https://bitbucket.org/jwilk/sinntp/issue/5
   * Handle socket exceptions gracefully.
   * Handle connection NNTP errors gracefully.
-  * Allow to provide newsgroup names as arguments for nntp-push.
+  * Allow providing newsgroup names as arguments for nntp-push.
   * Introduce the 'get' command and provide nntp-get symlink.
 
  -- Piotr Lewandowski <piotr.lewandowski@gmail.com>  Tue, 16 Jun 2009 15:09:53 +0200
