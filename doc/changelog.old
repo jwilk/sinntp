@@ -26,7 +26,7 @@ sinntp (0.91) unstable; urgency=low
 
 sinntp (0.90) unstable; urgency=low
 
-  * Remove locks if accessing a newsgroup failed. 
+  * Remove locks if accessing a newsgroup failed.
 
  -- Jakub Wilk <jwilk@jwilk.net>  Tue, 11 Jul 2006 09:59:29 +0200
 
