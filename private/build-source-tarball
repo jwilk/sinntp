@@ -35,9 +35,10 @@ sourceroot=$(mktemp -d -t "$name-source-XXXXXX")
 export TAR_OPTIONS='--owner root --group root --mode a+rX --format ustar'
 export GZIP='-9 -n'
 hg archive -r "$revision" "$sourceroot/$name-$version"
-cd "$sourceroot"
-rm */.hg*
-make -C */doc/manpages/
+cd "$sourceroot"/*
+rm .hg*
+make -C doc/manpages/
+cd ..
 tar -czf "$pwd/$name-$version.tar.gz" */
 rm -r "$sourceroot"
 set +x
