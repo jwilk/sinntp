@@ -37,6 +37,7 @@ export GZIP='-9 -n'
 hg archive -r "$revision" "$sourceroot/$name-$version"
 cd "$sourceroot"/*
 rm .hg*
+rm .travis.yml
 make -C doc/manpages/
 cd ..
 tar -czf "$pwd/$name-$version.tar.gz" */
