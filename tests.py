@@ -82,8 +82,7 @@ class test_xdg(unittest.TestCase):
         )
 
     def test_XDG_DATA_HOME_unset(self):
-        os.environ['XDG_DATA_HOME'] = ''
-        del os.environ['XDG_DATA_HOME']
+        os.environ.pop('XDG_DATA_HOME', None)
         self._check_xdg_data_home()
 
     def test_XDG_DATA_HOME_empty(self):
