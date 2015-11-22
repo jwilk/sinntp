@@ -183,7 +183,7 @@ class Pull(Command):
         else:
             return
         no = str(i)
-        while 1:
+        while True:
             _, _, message_id, body = connection.article(no)
             logging.debug('Reading message %s.', message_id)
             yield int(no), body
