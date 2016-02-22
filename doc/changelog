@@ -1,8 +1,9 @@
 sinntp (1.5.3) UNRELEASED; urgency=low
 
   * Drop support for Python 2.5.
+  * Update the XDG Base Directory Specification URL.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Wed, 03 Jun 2015 18:18:25 +0200
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 22 Feb 2016 17:30:10 +0100
 
 sinntp (1.5.2) unstable; urgency=low
 
