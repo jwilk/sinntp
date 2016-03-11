@@ -1,9 +1,12 @@
 sinntp (1.5.3) UNRELEASED; urgency=low
 
   * Drop support for Python 2.5.
+  * Fix documentation typos.
+  * Update bug tracker URLs.
+    http://google-opensource.blogspot.com/2015/03/farewell-to-google-code.html
   * Update the XDG Base Directory Specification URL.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Mon, 22 Feb 2016 17:30:10 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Fri, 11 Mar 2016 22:45:13 +0100
 
 sinntp (1.5.2) unstable; urgency=low
 
