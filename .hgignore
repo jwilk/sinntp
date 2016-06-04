@@ -1,4 +1,4 @@
 syntax: glob
 
-*.pyc
+*.py[co]
 doc/manpages/*.1
