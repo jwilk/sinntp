@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # encoding=UTF-8
 
-# Copyright © 2011-2012
+# Copyright © 2011-2016
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
 # This program is free software; you can redistribute it and/or modify it
@@ -18,6 +18,7 @@ try:
 except ImportError:
     import unittest
 
+import imp
 import os
 
 import utils
@@ -75,7 +76,7 @@ class test_xdg(unittest.TestCase):
     def _check_xdg_data_home(self, expected_path=None):
         if expected_path is None:
             expected_path = self._default_xdg_data_home
-        reload(utils)
+        imp.reload(utils)
         self.assertEqual(
             utils.xdg.xdg_data_home,
             expected_path,
