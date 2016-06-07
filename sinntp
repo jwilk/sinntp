@@ -346,15 +346,27 @@ def setup_signal_handler(signame):
         raise TerminatedBySignal(signame)
     signal.signal(getattr(signal, signame), handler)
 
+def get_default_nntp_server():
+    server = os.getenv('NNTPSERVER')
+    if server:
+        return server
+    try:
+        file = open('/etc/news/server')
+    except IOError as exc:
+        if exc.errno == errno.ENOENT:
+            return
+        raise
+    with file:
+        return file.readline().strip()
+
 if __name__ == '__main__':
     argv = sys.argv[1:]
     base_command = BaseCommand(argv)
     command = base_command.command_class(argv)
     setup_signal_handler('SIGTERM')
     setup_logging(command.options.syslog, command.options.verbose)
-    host = command.options.server or os.getenv('NNTPSERVER') or \
-        (os.path.exists('/etc/news/server') and open('/etc/news/server').readline().strip())
-    if not host:
+    host = command.options.server or get_default_nntp_server()
+    if host is None:
         sys.stderr.write('NNTP server is not specified.\n')
         sys.exit(2)
     host, port = utils.split_host(host, NNTP_PORT)
