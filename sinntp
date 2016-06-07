@@ -39,24 +39,6 @@ import sys
 import plugins
 import utils
 
-def monkey_patch_mailbox_module():
-    '''
-    Work around a bug in the `mailbox` module.
-    See https://bugs.python.org/issue3228 for details.
-    '''
-    try:
-        create_carefully = mailbox._create_carefully
-    except AttributeError:
-        return
-    def create_carefully_666(*args, **kwargs):
-        file = create_carefully(*args, **kwargs)
-        mode = os.stat(file.name).st_mode & 0o666
-        os.chmod(file.name, mode)
-        return file
-    mailbox._create_carefully = create_carefully_666
-monkey_patch_mailbox_module()
-del monkey_patch_mailbox_module
-
 # nntplib limits line length to 2048 bytes to prevent denial of service
 # (CVE-2013-1752). But the line length limit doesn't buy us much, because
 # sinntp loads the whole message into memory anyway. So let's lift the limit to
