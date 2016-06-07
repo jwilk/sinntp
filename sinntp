@@ -301,7 +301,9 @@ class BaseCommand(Command):
         list = List,
     )
 
-    __doc__ = ''.join(command.__doc__.rstrip() for command in COMMANDS.itervalues())
+    __doc__ = ''.join(
+        command.__doc__.rstrip() for command in COMMANDS.values()
+    )
 
     def get_option_parser(self):
         oparser = Command.get_option_parser(self)
