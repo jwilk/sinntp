@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding=UTF-8
 
 # Copyright © 2008-2016
@@ -72,7 +72,7 @@ class Config(object):
 
     def __getitem__(self, name):
         try:
-            file = open(self._get_file_name(name), 'rb')
+            file = open(self._get_file_name(name), 'rt', encoding='ASCII')
         except IOError as ex:
             if ex.errno == errno.ENOENT:
                 return 0
@@ -84,7 +84,7 @@ class Config(object):
 
     def __setitem__(self, name, value):
         path = self._get_file_name(name)
-        file = open(path + '_tmp', 'wb')
+        file = open(path + '_tmp', 'wt', encoding='ASCII')
         try:
             file.write(str(value))
             os.fsync(file.fileno())
@@ -166,7 +166,7 @@ class Pull(Command):
             return
         no = str(i)
         while True:
-            _, _, message_id, body = connection.article(no)
+            _, (_, message_id, body) = connection.article(no)
             logging.debug('Reading message %s.', message_id)
             yield int(no), body
             try:
@@ -200,7 +200,7 @@ class Pull(Command):
                         atime = stat.st_atime
                         mode = stat.st_mode
                     message = utils.join_lines(message)
-                    message = email.message_from_string(message)
+                    message = email.message_from_bytes(message)
                     for plugin in self.plugins:
                         message = plugin(message=message)
                         if message is None:
@@ -225,13 +225,13 @@ class Push(Command):
     '''
 
     def __call__(self, connection):
-        message = email.message_from_file(sys.stdin)
+        message = email.message_from_binary_file(sys.stdin.buffer)
         if 'Newsgroups' not in message and self.args:
             message['Newsgroups'] = ','.join(self.args)
         for plugin in self.plugins:
             message = plugin(message=message)
         buffer = io.BytesIO()
-        generator = email.generator.Generator(buffer, mangle_from_=False)
+        generator = email.generator.BytesGenerator(buffer, mangle_from_=False)
         generator.flatten(message)
         buffer.seek(0)
         connection.post(buffer)
@@ -254,9 +254,9 @@ class Get(Command):
 
     def __call__(self, connection):
         logging.debug('Reading message %s.', self.message_id)
-        _, _, _, message = connection.article(self.message_id)
+        _, (_, _, message) = connection.article(self.message_id)
         message = utils.join_lines(message)
-        sys.stdout.write(message)
+        sys.stdout.buffer.write(message)
 
 class List(Command):
     '''
@@ -332,7 +332,7 @@ def get_default_nntp_server():
     if server:
         return server
     try:
-        file = open('/etc/news/server')
+        file = open('/etc/news/server', encoding='ASCII')
     except IOError as exc:
         if exc.errno == errno.ENOENT:
             return
@@ -346,9 +346,10 @@ if __name__ == '__main__':
     command = base_command.command_class(argv)
     setup_signal_handler('SIGTERM')
     setup_logging(command.options.syslog, command.options.verbose)
-    if sys.version_info >= (3,):
-        logging.error('Python 2.X is required')
-        sys.exit(1)
+    if sys.version_info < (3, 2):
+        # E-mail and NNTP modules are broken in Python 3.1:
+        # https://docs.python.org/dev/whatsnew/3.2.html#new-improved-and-deprecated-modules
+        logging.error('Python >= 3.2 is required')
     host = command.options.server or get_default_nntp_server()
     if host is None:
         sys.stderr.write('NNTP server is not specified.\n')
@@ -365,7 +366,7 @@ if __name__ == '__main__':
             usenetrc=command.options.netrc
         )
     except socket.error as e:
-        logging.error('Could not connect to %s:%d: %s', host, port, e[1])
+        logging.error('Could not connect to %s:%d: %s', host, port, e.strerror)
         sys.exit(3)
     except NNTPError as e:
         logging.error('%s:%d returned an error: %s', host, port, e)

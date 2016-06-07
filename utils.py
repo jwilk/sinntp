@@ -66,12 +66,12 @@ def join_lines(lst):
     ensure there's trailing \n at the end
     '''
     if not lst:
-        return '\n'
-    if lst[-1].endswith('\n'):
+        return b'\n'
+    if lst[-1].endswith(b'\n'):
         itr = iter(lst)
     else:
-        itr = itertools.chain(lst, [''])
-    return '\n'.join(itr)
+        itr = itertools.chain(lst, [b''])
+    return b'\n'.join(itr)
 
 __all__ = [
     'join_lines',

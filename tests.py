@@ -17,8 +17,14 @@ try:
 except ImportError:
     import unittest
 
-import imp
 import os
+
+try:
+    # Python 3.4+
+    from importlib import reload
+except ImportError:
+    # Python 3.3 or older
+    from imp import reload
 
 import utils
 
@@ -75,7 +81,7 @@ class test_xdg(unittest.TestCase):
     def _check_xdg_data_home(self, expected_path=None):
         if expected_path is None:
             expected_path = self._default_xdg_data_home
-        imp.reload(utils)
+        reload(utils)
         self.assertEqual(
             utils.xdg.xdg_data_home,
             expected_path,
@@ -102,17 +108,17 @@ class test_join_lines(unittest.TestCase):
     def test_empty(self):
         lst = []
         s = utils.join_lines(lst)
-        self.assertEqual(s, '\n')
+        self.assertEqual(s, b'\n')
 
     def test_trailing_lf(self):
-        lst = ['eggs', 'bacon', 'spam']
+        lst = [b'eggs', b'bacon', b'spam']
         s = utils.join_lines(lst)
-        self.assertEqual(s, 'eggs\nbacon\nspam\n')
+        self.assertEqual(s, b'eggs\nbacon\nspam\n')
 
     def test_no_trailing_lf(self):
-        lst = ['eggs', 'bacon', 'spam\n']
+        lst = [b'eggs', b'bacon', b'spam\n']
         s = utils.join_lines(lst)
-        self.assertEqual(s, 'eggs\nbacon\nspam\n')
+        self.assertEqual(s, b'eggs\nbacon\nspam\n')
 
 if __name__ == '__main__':
     unittest.main()
