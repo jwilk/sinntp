@@ -199,9 +199,7 @@ class Pull(Command):
                         stat = os.stat(mbox_name)
                         atime = stat.st_atime
                         mode = stat.st_mode
-                    if not (message and message[-1].endswith('\n')):
-                        message += ['']
-                    message = '\n'.join(message)
+                    message = utils.join_lines(message)
                     message = email.message_from_string(message)
                     for plugin in self.plugins:
                         message = plugin(message=message)
@@ -257,8 +255,8 @@ class Get(Command):
     def __call__(self, connection):
         logging.debug('Reading message %s.', self.message_id)
         _, _, _, message = connection.article(self.message_id)
-        message = '\n'.join(message)
-        print(message)
+        message = utils.join_lines(message)
+        sys.stdout.write(message)
 
 class List(Command):
     '''

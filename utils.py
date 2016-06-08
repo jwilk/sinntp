@@ -12,6 +12,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
+import itertools
 import os
 import re
 
@@ -58,5 +59,18 @@ class xdg(object):
             if not os.path.isdir(path):
                 raise
         return path
+
+def join_lines(lst):
+    r'''
+    join the list of lines;
+    ensure there's trailing \n at the end
+    '''
+    if not lst:
+        return '\n'
+    if lst[-1].endswith('\n'):
+        itr = iter(lst)
+    else:
+        itr = itertools.chain(lst, [''])
+    return '\n'.join(itr)
 
 # vim:ts=4 sts=4 sw=4 et

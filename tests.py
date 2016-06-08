@@ -97,6 +97,23 @@ class test_xdg(unittest.TestCase):
         os.environ['XDG_DATA_HOME'] = '/eggs'
         self._check_xdg_data_home('/eggs')
 
+class test_join_lines(unittest.TestCase):
+
+    def test_empty(self):
+        lst = []
+        s = utils.join_lines(lst)
+        self.assertEqual(s, '\n')
+
+    def test_trailing_lf(self):
+        lst = ['eggs', 'bacon', 'spam']
+        s = utils.join_lines(lst)
+        self.assertEqual(s, 'eggs\nbacon\nspam\n')
+
+    def test_no_trailing_lf(self):
+        lst = ['eggs', 'bacon', 'spam\n']
+        s = utils.join_lines(lst)
+        self.assertEqual(s, 'eggs\nbacon\nspam\n')
+
 if __name__ == '__main__':
     unittest.main()
 
