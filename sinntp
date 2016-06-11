@@ -45,7 +45,7 @@ import utils
 # 1 megabyte.
 #
 # References:
-# * https://bitbucket.org/jwilk/sinntp/issue/9
+# * https://github.com/jwilk/sinntp/issues/9
 # * https://bugs.python.org/issue16040
 nntplib._MAXLINE = 1 << 20
 
