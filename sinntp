@@ -346,6 +346,9 @@ if __name__ == '__main__':
     command = base_command.command_class(argv)
     setup_signal_handler('SIGTERM')
     setup_logging(command.options.syslog, command.options.verbose)
+    if sys.version_info >= (3,):
+        logging.error('Python 2.X is required')
+        sys.exit(1)
     host = command.options.server or get_default_nntp_server()
     if host is None:
         sys.stderr.write('NNTP server is not specified.\n')
