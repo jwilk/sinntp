@@ -270,7 +270,8 @@ class List(Command):
 
     def __call__(self, connection):
         _, groups = connection.list()
-        print('\n'.join(group for group, _, _, flag in groups))
+        for group, _, _, _ in groups:
+            print(group)
 
 class BaseCommand(Command):
 
