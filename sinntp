@@ -271,7 +271,13 @@ class List(Command):
     def __call__(self, connection):
         _, groups = connection.list()
         for group, _, _, _ in groups:
-            print(group)
+            # RFC 3997 §10.2 says that group names SHOULD be restricted to
+            # US-ASCII and that 8-bit encodings SHOULD NOT be used.
+            # But non-UTF-8 group names have been seen in the wild,
+            # so let's handle them gracefully.
+            bgroup = group.encode('UTF-8', 'surrogateescape')
+            sys.stdout.buffer.write(bgroup)
+            sys.stdout.buffer.write(b'\n')
 
 class BaseCommand(Command):
 
