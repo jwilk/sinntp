@@ -73,4 +73,10 @@ def join_lines(lst):
         itr = itertools.chain(lst, [''])
     return '\n'.join(itr)
 
+__all__ = [
+    'join_lines',
+    'split_host',
+    'xdg',
+]
+
 # vim:ts=4 sts=4 sw=4 et
