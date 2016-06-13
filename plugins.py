@@ -29,4 +29,10 @@ def mimify(type='text/plain', charset='US-ASCII', message=None):
         message['Content-Type'] = '%(type)s; charset=%(charset)s' % locals()
     return message
 
+__all__ = [
+    'debug',
+    'mimify',
+    'strip_headers',
+]
+
 # vim:ts=4 sts=4 sw=4 et
