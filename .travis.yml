@@ -12,9 +12,11 @@ addons:
     packages:
     - libxml2-utils
 install:
+- pip install pyflakes
 - pip install docutils
 script:
 - nosetests --verbose
+- private/run-pyflakes
 - grep -r -l ft=rst doc/ | xargs -t -n1 -I{} rst2xml.py --strict {} /dev/null
 - xmllint --noout --valid doc/manpages/*.xml
 
