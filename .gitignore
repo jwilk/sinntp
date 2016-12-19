@@ -1,2 +1,2 @@
-*.py[co]
+__pycache__
 doc/manpages/*.1
