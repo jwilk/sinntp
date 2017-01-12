@@ -1,3 +1,9 @@
+sinntp (1.6.1) UNRELEASED; urgency=low
+
+  * 
+
+ -- Jakub Wilk <jwilk@jwilk.net>  Thu, 12 Jan 2017 16:57:39 +0100
+
 sinntp (1.6) unstable; urgency=low
 
   * Use /usr/bin/env in shebangs.

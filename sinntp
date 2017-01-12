@@ -17,7 +17,7 @@
 from __future__ import print_function
 
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
-__version__ = '1.6'
+__version__ = '1.6.1'
 
 from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
 import argparse
