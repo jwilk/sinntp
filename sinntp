@@ -152,8 +152,8 @@ class Pull(Command):
         i = max(start, first)
         count = max(last - i + 1, 0)
         logging.info('%(count)s message%(plural)s to download.' % dict(
-            count = count if count else 'No',
-            plural = 's' if count != 1 else ''
+            count=(count if count else 'No'),
+            plural=('s' if count != 1 else '')
         ))
         while i <= last:
             try:
@@ -282,10 +282,10 @@ class List(Command):
 class BaseCommand(Command):
 
     COMMANDS = dict(
-        pull = Pull,
-        push = Push,
-        get = Get,
-        list = List,
+        pull=Pull,
+        push=Push,
+        get=Get,
+        list=List,
     )
 
     __doc__ = ''.join(
@@ -312,7 +312,7 @@ def setup_logging(syslog, verbose):
     else:
         handler = logging.handlers.SysLogHandler(
             '/dev/log',
-            facility = logging.handlers.SysLogHandler.LOG_NEWS
+            facility=logging.handlers.SysLogHandler.LOG_NEWS
         )
         format = ''.join((sys.argv[0], '[%(process)d]: ', format))
     formatter = logging.Formatter(format, None)
