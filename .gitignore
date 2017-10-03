@@ -1,2 +1,2 @@
 __pycache__
-doc/manpages/*.1
+/doc/manpages/*.1
