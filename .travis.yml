@@ -15,10 +15,11 @@ addons:
     - libxml2-utils
     - docbook-xml
 install:
-- pip install pyflakes
+- pip install pydiatra pyflakes
 - pip install docutils
 script:
 - nosetests --verbose
+- private/run-pydiatra
 - private/run-pyflakes
 - private/check-rst
 - xmllint --nonet --noout --valid doc/manpages/*.xml
