@@ -19,8 +19,8 @@ install:
 - pip install docutils
 script:
 - nosetests --verbose
-- private/run-pydiatra
-- private/run-pyflakes
+- python3 -m pydiatra .
+- python3 -m pyflakes .
 - private/check-rst
 - xmllint --nonet --noout --valid doc/manpages/*.xml
 
