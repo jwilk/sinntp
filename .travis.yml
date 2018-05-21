@@ -14,8 +14,11 @@ addons:
     packages:
     - libxml2-utils
     - docbook-xml
+before_install:
+- pyflakes=pyflakes
+- if [[ $TRAVIS_PYTHON_VERSION = 3.[23] ]]; then pyflakes='pyflakes<2'; fi
 install:
-- pip install pydiatra pyflakes
+- pip install pydiatra $pyflakes
 - pip install docutils
 script:
 - nosetests --verbose
