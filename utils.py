@@ -1,5 +1,3 @@
-# encoding=UTF-8
-
 # Copyright © 2011-2016
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
