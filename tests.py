@@ -12,6 +12,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
+...  # Python 3 is required
+
 try:
     import unittest2 as unittest
 except ImportError:

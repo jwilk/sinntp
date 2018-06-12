@@ -16,6 +16,8 @@
 
 from __future__ import print_function
 
+...  # Python 3 is required
+
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '1.6.1'
 
