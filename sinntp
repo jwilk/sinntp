@@ -355,7 +355,8 @@ if __name__ == '__main__':
     if sys.version_info < (3, 2):
         # E-mail and NNTP modules are broken in Python 3.1:
         # https://docs.python.org/dev/whatsnew/3.2.html#new-improved-and-deprecated-modules
-        logging.error('Python >= 3.2 is required')
+        sys.stderr.write('Python >= 3.2 is required\n')
+        sys.exit(1)
     host = command.options.server or get_default_nntp_server()
     if host is None:
         sys.stderr.write('NNTP server is not specified.\n')
