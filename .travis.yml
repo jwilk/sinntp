@@ -12,8 +12,8 @@ python:
 addons:
   apt:
     packages:
-    - libxml2-utils
     - docbook-xml
+    - libxml2-utils
 before_install:
 - pyflakes=pyflakes
 - if [[ $TRAVIS_PYTHON_VERSION = 3.[23] ]]; then pyflakes='pyflakes<2'; fi
