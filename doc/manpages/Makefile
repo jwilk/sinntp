@@ -24,6 +24,10 @@ all: $(man_files)
 	$(xsltproc) $(xsl) $(<)
 	perl -pi -e '/^[.]TH\b/ and s,"[0-9/]{10}","$(shell date +%F)",' $(@)
 
+.PHONY: check
+check: $(xml_files)
+	xmllint --nonet --noout --valid $(^)
+
 .PHONY: clean
 clean:
 	rm -f $(man_files)
