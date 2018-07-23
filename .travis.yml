@@ -13,7 +13,9 @@ addons:
   apt:
     packages:
     - docbook-xml
+    - docbook-xsl
     - libxml2-utils
+    - xsltproc
 before_install:
 - pyflakes=pyflakes
 - if [[ $TRAVIS_PYTHON_VERSION = 3.[23] ]]; then pyflakes='pyflakes<2'; fi
@@ -26,6 +28,7 @@ script:
 - python3 -m pydiatra .
 - python3 -m pyflakes .
 - private/check-rst
+- make -C doc/manpages
 - make -C doc/manpages check
 
 # vim:ts=2 sts=2 sw=2 et
