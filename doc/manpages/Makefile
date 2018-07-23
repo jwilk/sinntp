@@ -15,4 +15,6 @@ all: $(MAN_FILES)
 clean:
 	rm -f $(MAN_FILES)
 
+.error = GNU make is required
+
 # vim:ts=4 sts=4 sw=4 noet
