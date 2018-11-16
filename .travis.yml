@@ -20,8 +20,8 @@ before_install:
 - pyflakes=pyflakes
 - if [[ $TRAVIS_PYTHON_VERSION = 3.[23] ]]; then pyflakes='pyflakes<2'; fi
 install:
-- pip install pydiatra $pyflakes
-- pip install docutils
+- python3 -m pip install pydiatra $pyflakes
+- python3 -m pip install docutils
 script:
 - dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
 - nosetests --verbose
