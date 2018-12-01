@@ -25,7 +25,6 @@ from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
 import argparse
 import email
 import email.generator
-import errno
 import functools
 import io
 import logging
@@ -75,10 +74,8 @@ class Config(object):
     def __getitem__(self, name):
         try:
             file = open(self._get_file_name(name), 'rt', encoding='ASCII')
-        except IOError as ex:
-            if ex.errno == errno.ENOENT:
-                return 0
-            raise
+        except FileNotFoundError:
+            return 0
         try:
             return int(file.read())
         finally:
@@ -341,10 +338,8 @@ def get_default_nntp_server():
         return server
     try:
         file = open('/etc/news/server', encoding='ASCII')
-    except IOError as exc:
-        if exc.errno == errno.ENOENT:
-            return
-        raise
+    except FileNotFoundError:
+        return
     with file:
         return file.readline().strip()
 
