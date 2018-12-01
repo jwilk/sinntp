@@ -354,10 +354,8 @@ if __name__ == '__main__':
     command = base_command.command_class(argv)
     setup_signal_handler('SIGTERM')
     setup_logging(command.options.syslog, command.options.verbose)
-    if sys.version_info < (3, 2):
-        # E-mail and NNTP modules are broken in Python 3.1:
-        # https://docs.python.org/dev/whatsnew/3.2.html#new-improved-and-deprecated-modules
-        sys.stderr.write('Python >= 3.2 is required\n')
+    if sys.version_info < (3, 3):
+        sys.stderr.write('Python >= 3.3 is required\n')
         sys.exit(1)
     host = command.options.server or get_default_nntp_server()
     if host is None:
