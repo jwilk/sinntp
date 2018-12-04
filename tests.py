@@ -14,12 +14,8 @@
 
 ...  # Python 3 is required
 
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
 import os
+import unittest
 
 try:
     # Python 3.4+
