@@ -30,7 +30,7 @@ def split_host(host, default_port=None):
         port = int(port)
     return host, port
 
-class xdg(object):
+class xdg():
     '''
     tiny replacement for PyXDG's xdg.BaseDirectory
     '''
