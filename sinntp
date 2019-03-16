@@ -57,11 +57,11 @@ class Config(object):
         self._port = port
         self._root = os.getenv('SINNTP_HOME')
         if self._root:
-            logging.warn('$SINNTP_HOME is deprecated in favor of $XDG_DATA_HOME. See the NEWS file for details.')
+            logging.warning('$SINNTP_HOME is deprecated in favor of $XDG_DATA_HOME. See the NEWS file for details.')
             return
         self._root = os.path.expanduser('~/.sinntp/')
         if os.path.exists(self._root):
-            logging.warn('$HOME/.sinntp/ is deprecated in favor of $XDG_DATA_HOME. See the NEWS file for details.')
+            logging.warning('$HOME/.sinntp/ is deprecated in favor of $XDG_DATA_HOME. See the NEWS file for details.')
             return
         self._root = utils.xdg.save_data_path('sinntp')
 
