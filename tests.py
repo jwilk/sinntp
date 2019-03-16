@@ -12,7 +12,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-...  # Python 3 is required
+type(...)  # Python 3 is required
 
 import os
 import unittest
