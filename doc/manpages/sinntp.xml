@@ -76,7 +76,7 @@
 				<term><option>--version</option></term>
 				<listitem>
 					<para>
-						Show program's version number and exit.
+						Show version information and exit.
 					</para>
 				</listitem>
 			</varlistentry>

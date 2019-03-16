@@ -95,7 +95,7 @@ class Command(object):
 
     def get_option_parser(self):
         o = argparse.ArgumentParser(usage=self.__doc__.rstrip())
-        o.add_argument('--version', action='version', version='%(prog)s ' + __version__, help='show program\'s version number and exit')
+        o.add_argument('--version', action='version', version='%(prog)s ' + __version__, help='show version information and exit')
         o.add_argument('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
         o.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
         o.add_argument('-q', '--quiet', dest='verbose', action='store_false', help='be less verbose')
