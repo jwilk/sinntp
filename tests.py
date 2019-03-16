@@ -1,6 +1,6 @@
 # encoding=UTF-8
 
-# Copyright © 2011-2018
+# Copyright © 2011-2019
 #   Jakub Wilk <jwilk@jwilk.net>.
 #
 # This program is free software; you can redistribute it and/or modify it
