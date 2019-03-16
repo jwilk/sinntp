@@ -22,7 +22,7 @@ install:
 - python3 -m pip install docutils
 script:
 - dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
-- nosetests --verbose
+- python3 -m nose --verbose
 - python3 -m pydiatra .
 - python3 -m pyflakes .
 - private/check-rst
