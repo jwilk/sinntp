@@ -1,6 +1,5 @@
-# Copyright © 2008-2015
-#   Piotr Lewandowski <piotr.lewandowski@gmail.com>,
-#   Jakub Wilk <jwilk@jwilk.net>.
+# Copyright © 2008-2009 Piotr Lewandowski <piotr.lewandowski@gmail.com>
+# Copyright © 2008-2022 Jakub Wilk <jwilk@jwilk.net>
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License, version 2, as
