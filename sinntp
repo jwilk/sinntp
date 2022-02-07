@@ -289,7 +289,7 @@ class BaseCommand(Command):
     )
 
     __doc__ = ''.join(
-        command.__doc__.rstrip() for command in COMMANDS.values()
+        '\n  ' + command.__doc__.strip() for command in COMMANDS.values()
     )
 
     def get_option_parser(self):
