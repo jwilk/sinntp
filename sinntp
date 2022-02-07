@@ -120,7 +120,8 @@ class Command():
             name = spec.pop(0)
             args = [arg for arg in spec if '=' not in arg]
             kwargs = dict(arg.split('=', 1) for arg in spec if '=' in arg)
-            self.plugins += [functools.partial(plugins.__dict__[name], *args, **kwargs)]
+            plugin = getattr(plugins, name)
+            self.plugins += [functools.partial(plugin, *args, **kwargs)]
         self.oparser = oparser
 
     def __call__(self):
