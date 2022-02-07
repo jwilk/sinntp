@@ -24,7 +24,7 @@ def strip_headers(headers='To,Cc,Bcc', message=None):
 
 def mimify(type='text/plain', charset='US-ASCII', message=None):
     if 'Content-Type' not in message:
-        message['Content-Type'] = '%(type)s; charset=%(charset)s' % locals()
+        message['Content-Type'] = '{tp}; charset={cs}'.format(tp=type, cs=charset)
     return message
 
 __all__ = [
