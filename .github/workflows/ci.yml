@@ -54,6 +54,10 @@ jobs:
       run: |
         python3 -m pip install docutils pygments
         private/check-rst
+    - name: set up APT
+      run: |
+        printf 'Apt::Install-Recommends "false";\n' | sudo tee -a /etc/apt/apt.conf
+        sudo apt-get update
     - name: install docbook tools
       run:
         sudo apt-get install -y
