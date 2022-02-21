@@ -11,7 +11,7 @@
 # GNU General Public License for more details.
 
 def debug(*args, **kwargs):
-    print('debug(*%r, **%r)' % (args, kwargs))
+    print(f'debug(*{args!r}, **{kwargs!r})')
 
 def strip_headers(headers='To,Cc,Bcc', message=None):
     headers = headers.split(',')
@@ -21,7 +21,7 @@ def strip_headers(headers='To,Cc,Bcc', message=None):
 
 def mimify(type='text/plain', charset='US-ASCII', message=None):
     if 'Content-Type' not in message:
-        message['Content-Type'] = '{tp}; charset={cs}'.format(tp=type, cs=charset)
+        message['Content-Type'] = f'{type}; charset={charset}'
     return message
 
 __all__ = [
