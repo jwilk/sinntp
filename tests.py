@@ -14,15 +14,9 @@
 
 type(0_0)  # Python >= 3.6 is required
 
+import importlib
 import os
 import unittest
-
-try:
-    # Python 3.4+
-    from importlib import reload
-except ImportError:
-    # Python 3.3 or older
-    from imp import reload
 
 import utils
 
@@ -79,7 +73,7 @@ class test_xdg(unittest.TestCase):
     def _check_xdg_data_home(self, expected_path=None):
         if expected_path is None:
             expected_path = self._default_xdg_data_home
-        reload(utils)
+        importlib.reload(utils)
         self.assertEqual(
             utils.xdg.xdg_data_home,
             expected_path,
