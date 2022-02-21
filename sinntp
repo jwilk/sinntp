@@ -13,8 +13,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-from __future__ import print_function
-
 type(...)  # Python 3 is required
 
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
