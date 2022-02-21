@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-type(...)  # Python 3 is required
+type(0_0)  # Python >= 3.6 is required
 
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '1.6.1'
@@ -350,9 +350,6 @@ if __name__ == '__main__':
     command = base_command.command_class(argv)
     setup_signal_handler('SIGTERM')
     setup_logging(command.options.syslog, command.options.verbose)
-    if sys.version_info < (3, 3):
-        sys.stderr.write('Python >= 3.3 is required\n')
-        sys.exit(1)
     host = command.options.server or get_default_nntp_server()
     if host is None:
         sys.stderr.write('NNTP server is not specified.\n')
