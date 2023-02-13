@@ -1,14 +1,17 @@
 sinntp (1.6.1) UNRELEASED; urgency=low
 
-  * Add Python 2.X version checks.
-  * Drop support for Python 3.2.
-  * Rephrase help message for --version.
-  * Improve manual page build system:
+  * Improve error handling for missing plugins.
+  * Refurbish the help message:
+    + Reduce indentation in the sub-command list.
+    + Rephrase description of --version.
+  * Improve the manual page build system:
+    + Add check against BSD make. (Only GNU make is supported.)
+    + Add the “check” target.
     + Use perl for in-place edits.
-    + Add check against BSD make.
-    + Add “check” target.
+  * Drop support for Python < 3.6.
+  * Add Python 2.X version checks.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Thu, 19 Dec 2019 17:08:41 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 13 Feb 2023 14:07:02 +0100
 
 sinntp (1.6) unstable; urgency=low
 
