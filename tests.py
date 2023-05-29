@@ -12,7 +12,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-type(0_0)  # Python >= 3.6 is required
+int(0_0)  # Python >= 3.6 is required
 
 import importlib
 import os

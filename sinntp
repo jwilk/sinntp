@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-type(0_0)  # Python >= 3.6 is required
+int(0_0)  # Python >= 3.6 is required
 
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '1.6.1'
