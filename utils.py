@@ -37,9 +37,9 @@ def makedirs700(path):
     # is fixed.
     if os.path.isdir(path):
         return
-    head, tail = os.path.split(path)
-    if head:
-        makedirs700(head)
+    parent = os.path.dirname(path)
+    if parent:
+        makedirs700(parent)
     try:
         os.mkdir(path, 0o700)
     except OSError:
