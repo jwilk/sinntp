@@ -16,6 +16,8 @@ int(0_0)  # Python >= 3.6 is required
 
 import importlib
 import os
+import stat
+import tempfile
 import unittest
 
 import utils
@@ -94,6 +96,18 @@ class test_xdg(unittest.TestCase):
     def test_XDG_DATA_HOME_absolute(self):
         os.environ['XDG_DATA_HOME'] = '/eggs'
         self._check_xdg_data_home('/eggs')
+
+    def test_save_data_path(self):
+        for suffix in '', '/':
+            with tempfile.TemporaryDirectory(prefix='sinntp.') as tmpdir:
+                os.environ['XDG_DATA_HOME'] = f'{tmpdir}/eggs/bacon{suffix}'
+                importlib.reload(utils)
+                for i in (0, 1):
+                    utils.xdg.save_data_path('spam')
+                    for dir in f'{tmpdir}/eggs', f'{tmpdir}/eggs/bacon':
+                         mode = os.stat(dir).st_mode
+                         mode = stat.filemode(mode)
+                         self.assertEqual(mode, 'drwx------')
 
 class test_join_lines(unittest.TestCase):
 
