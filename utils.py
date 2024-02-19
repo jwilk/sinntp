@@ -30,6 +30,22 @@ def split_host(host, default_port=None):
         port = int(port)
     return host, port
 
+def makedirs700(path):
+    # TODO: Get rid of this function once
+    # https://github.com/python/cpython/issues/86533
+    # ("Restore os.makedirs ability to apply mode to all directories created")
+    # is fixed.
+    if os.path.isdir(path):
+        return
+    head, tail = os.path.split(path)
+    if head:
+        makedirs700(head)
+    try:
+        os.mkdir(path, 0o700)
+    except OSError:
+        if not os.path.isdir(path):
+            raise
+
 class xdg():
     '''
     tiny replacement for PyXDG's xdg.BaseDirectory
@@ -51,11 +67,7 @@ class xdg():
     @classmethod
     def save_data_path(xdg, resource):
         path = os.path.join(xdg.xdg_data_home, resource)
-        try:
-            os.makedirs(path, 0o700)
-        except OSError:
-            if not os.path.isdir(path):
-                raise
+        makedirs700(path)
         return path
 
 def join_lines(lst):
