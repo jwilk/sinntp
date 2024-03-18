@@ -47,7 +47,7 @@ import utils
 # * https://bugs.python.org/issue16040
 nntplib._MAXLINE = 1 << 20
 
-class Config():
+class Config:
 
     def __init__(self, hostname, port):
         self._hostname = hostname
@@ -88,7 +88,7 @@ class Config():
             file.close()
         os.rename(path + '_tmp', path)
 
-class Command():
+class Command:
 
     def get_option_parser(self):
         o = argparse.ArgumentParser(usage=self.__doc__.rstrip())

@@ -46,7 +46,7 @@ def makedirs700(path):
         if not os.path.isdir(path):
             raise
 
-class xdg():
+class xdg:
     '''
     tiny replacement for PyXDG's xdg.BaseDirectory
     '''
