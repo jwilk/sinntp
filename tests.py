@@ -105,9 +105,9 @@ class test_xdg(unittest.TestCase):
                 for i in (0, 1):
                     utils.xdg.save_data_path('spam')
                     for dir in f'{tmpdir}/eggs', f'{tmpdir}/eggs/bacon':
-                         mode = os.stat(dir).st_mode
-                         mode = stat.filemode(mode)
-                         self.assertEqual(mode, 'drwx------')
+                        mode = os.stat(dir).st_mode
+                        mode = stat.filemode(mode)
+                        self.assertEqual(mode, 'drwx------')
 
 class test_join_lines(unittest.TestCase):
 
