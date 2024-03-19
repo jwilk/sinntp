@@ -330,6 +330,7 @@ class TerminatedBySignal(Exception):
 
 def setup_signal_handler(signame):
     def handler(signo, frame):
+        del frame
         raise TerminatedBySignal(signame)
     signal.signal(getattr(signal, signame), handler)
 
