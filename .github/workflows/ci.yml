@@ -33,6 +33,7 @@ jobs:
     - name: run tests
       run: |
         python3 tests.py -v
+        ./sinntp --help
     - name: run pydiatra
       run: |
         python3 -m pip install pydiatra
