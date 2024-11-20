@@ -23,6 +23,7 @@ jobs:
           os: ubuntu-22.04
         - python: '3.13'
           os: ubuntu-24.04
+          deadlib: deadlib
     runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v4
@@ -30,6 +31,10 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{matrix.python}}
+    - name: install nntplib
+      if: matrix.deadlib
+      run:
+        python3 -m pip install standard-nntplib
     - name: run tests
       run: |
         python3 tests.py -v
