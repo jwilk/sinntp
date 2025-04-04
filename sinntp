@@ -34,6 +34,8 @@ import sys
 import warnings
 
 with warnings.catch_warnings():
+    # Catch nntplib deprecation warning:
+    #    DeprecationWarning: 'nntplib' is deprecated and slated for removal in Python 3.13
     warnings.filterwarnings(action='ignore', category=DeprecationWarning, module=__name__)
     import nntplib
 
