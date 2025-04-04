@@ -37,7 +37,20 @@ with warnings.catch_warnings():
     # Catch nntplib deprecation warning:
     #    DeprecationWarning: 'nntplib' is deprecated and slated for removal in Python 3.13
     warnings.filterwarnings(action='ignore', category=DeprecationWarning, module=__name__)
-    import nntplib
+    try:
+        import nntplib
+    except ImportError as exc:
+        if sys.version_info >= (3, 13):
+            import importlib.metadata
+            pkgname = 'standard-nntplib'
+            try:
+                pkg = importlib.metadata.distribution(pkgname)
+            except importlib.metadata.PackageNotFoundError:
+                pkg = None
+            if not pkg:
+                msg = f'https://pypi.org/project/{pkgname}/ is required for Python >= 3.13'
+                exc.msg += f'; {msg}'
+        raise
 
 from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
 
