@@ -18,7 +18,6 @@ int(0_0)  # Python >= 3.6 is required
 __author__ = ('Jakub Wilk', 'Piotr Lewandowski')
 __version__ = '1.6.1'
 
-from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
 import argparse
 import email
 import email.generator
@@ -27,12 +26,18 @@ import io
 import logging
 import logging.handlers
 import mailbox
-import nntplib
 import os
 import os.path
 import signal
 import socket
 import sys
+import warnings
+
+with warnings.catch_warnings():
+    warnings.filterwarnings(action='ignore', category=DeprecationWarning, module=__name__)
+    import nntplib
+
+from nntplib import NNTP, NNTP_PORT, NNTPTemporaryError, NNTPError
 
 import plugins
 import utils
