@@ -81,7 +81,7 @@ def join_lines(lst):
         itr = iter(lst)
     else:
         itr = itertools.chain(lst, [b''])
-    return b'\n'.join(itr)
+    return bytes.join(b'\n', itr)
 
 __all__ = [
     'join_lines',
