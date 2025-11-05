@@ -247,7 +247,7 @@ class Push(Command):
     def __call__(self, connection):
         message = email.message_from_binary_file(sys.stdin.buffer)
         if 'Newsgroups' not in message and self.args:
-            message['Newsgroups'] = ','.join(self.args)
+            message['Newsgroups'] = str.join(',', self.args)
         for plugin in self.plugins:
             message = plugin(message=message)
         buffer = io.BytesIO()
@@ -308,9 +308,9 @@ class BaseCommand(Command):
         list=List,
     )
 
-    __doc__ = ''.join(
+    __doc__ = str.join('', (
         '\n  ' + command.__doc__.strip() for command in COMMANDS.values()
-    )
+    ))
 
     def get_option_parser(self):
         oparser = Command.get_option_parser(self)
@@ -334,7 +334,7 @@ def setup_logging(syslog, verbose):
             '/dev/log',
             facility=logging.handlers.SysLogHandler.LOG_NEWS
         )
-        format = ''.join((sys.argv[0], '[%(process)d]: ', format))
+        format = str.join('', (sys.argv[0], '[%(process)d]: ', format))
     formatter = logging.Formatter(format, None)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
