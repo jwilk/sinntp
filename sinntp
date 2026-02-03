@@ -112,6 +112,7 @@ class Command:
 
     def get_option_parser(self):
         ap = argparse.ArgumentParser(usage=self.__doc__.rstrip())
+        ap.color = False
         ap.add_argument('--version', action='version', version='%(prog)s ' + __version__, help='show version information and exit')
         ap.add_argument('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
         ap.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
