@@ -111,18 +111,18 @@ class Config:
 class Command:
 
     def get_option_parser(self):
-        o = argparse.ArgumentParser(usage=self.__doc__.rstrip())
-        o.add_argument('--version', action='version', version='%(prog)s ' + __version__, help='show version information and exit')
-        o.add_argument('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
-        o.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
-        o.add_argument('-q', '--quiet', dest='verbose', action='store_false', help='be less verbose')
-        o.add_argument('-p', '--plugin', dest='plugins', action='append', metavar='PLUGIN', help='use plugin')
-        o.add_argument('-S', '--server', metavar='HOST[:PORT]', dest='server', action='store', help='specify server address')
-        o.add_argument('-U', '--username', dest='username', action='store', help='specify username')
-        o.add_argument('-P', '--password', dest='password', action='store', help='specify password')
-        o.add_argument('--no-netrc', dest='netrc', action='store_false', help='ignore credentials in ~/.netrc')
-        o.add_argument('-t', '--timeout', dest='timeout', action='store', type=int, help='specify connection timeout')
-        return o
+        ap = argparse.ArgumentParser(usage=self.__doc__.rstrip())
+        ap.add_argument('--version', action='version', version='%(prog)s ' + __version__, help='show version information and exit')
+        ap.add_argument('-s', '--syslog', dest='syslog', action='store_true', help='use syslog for logging')
+        ap.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='be more verbose')
+        ap.add_argument('-q', '--quiet', dest='verbose', action='store_false', help='be less verbose')
+        ap.add_argument('-p', '--plugin', dest='plugins', action='append', metavar='PLUGIN', help='use plugin')
+        ap.add_argument('-S', '--server', metavar='HOST[:PORT]', dest='server', action='store', help='specify server address')
+        ap.add_argument('-U', '--username', dest='username', action='store', help='specify username')
+        ap.add_argument('-P', '--password', dest='password', action='store', help='specify password')
+        ap.add_argument('--no-netrc', dest='netrc', action='store_false', help='ignore credentials in ~/.netrc')
+        ap.add_argument('-t', '--timeout', dest='timeout', action='store', type=int, help='specify connection timeout')
+        return ap
 
     def __init__(self, argv):
         oparser = self.get_option_parser()
